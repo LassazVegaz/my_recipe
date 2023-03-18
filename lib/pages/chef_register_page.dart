@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_recipe/theme.dart';
 import 'package:my_recipe/widgets/outlined_textfield.dart';
 
 class ChefRegisterPage extends StatelessWidget {
@@ -58,8 +59,28 @@ class ChefRegisterPage extends StatelessWidget {
                   hintText: 'Phone number',
                 ),
                 const SizedBox(height: 24),
-                const OutlinedTextField(
-                  hintText: 'Gender',
+                DropdownButtonFormField<String>(
+                  items: const [
+                    DropdownMenuItem(
+                      value: null,
+                      child: Text('Gender'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'male',
+                      child: Text('Male'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'female',
+                      child: Text('Female'),
+                    ),
+                  ],
+                  onChanged: (value) {},
+                  isExpanded: true,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: fieldBorderRadius,
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 24),
                 const OutlinedTextField(
