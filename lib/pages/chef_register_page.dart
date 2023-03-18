@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:multi_select_flutter/dialog/mult_select_dialog.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:my_recipe/theme.dart';
 import 'package:my_recipe/widgets/outlined_textfield.dart';
 
@@ -83,8 +85,25 @@ class ChefRegisterPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 24),
-                const OutlinedTextField(
-                  hintText: 'Food types',
+                MultiSelectDialogField(
+                  items: [
+                    MultiSelectItem('Italian', 'Italian'),
+                    MultiSelectItem('Chinese', 'Chinese'),
+                  ],
+                  title: const Text('Select your cuisine'),
+                  buttonText: const Text('Food types'),
+                  selectedColor: themeData.colorScheme.primary,
+                  onConfirm: (p0) {},
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey,
+                    ),
+                    borderRadius: fieldBorderRadius,
+                  ),
+                  buttonIcon: const Icon(
+                    Icons.arrow_drop_down,
+                    color: Colors.black,
+                  ),
                 ),
                 const SizedBox(height: 30),
                 ElevatedButton(
