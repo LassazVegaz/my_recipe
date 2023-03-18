@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:my_recipe/widgets/outlined_textfield.dart';
 
 class ChefRegisterPage extends StatelessWidget {
@@ -21,6 +19,12 @@ class ChefRegisterPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Column(
             children: [
+              const SizedBox(height: 30),
+              const CircleAvatar(
+                radius: 75,
+                backgroundImage: AssetImage('assets/chef.jpg'),
+              ),
+              const SizedBox(height: 50),
               Row(
                 children: const [
                   Expanded(
