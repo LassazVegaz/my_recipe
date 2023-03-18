@@ -13,6 +13,8 @@ const _h1TextStyle = TextStyle(
 
 const _primaryColor = Color(0xff324E97);
 
+const fieldBorderRadius = BorderRadius.all(Radius.circular(8));
+
 var themeData = ThemeData(
   colorScheme: ColorScheme.fromSwatch(
     backgroundColor: Colors.white,
