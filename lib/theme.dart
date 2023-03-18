@@ -56,6 +56,7 @@ var themeData = ThemeData(
         color: Colors.white,
       ),
       shape: _buttonBorderShape,
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
     ),
   ),
   outlinedButtonTheme: OutlinedButtonThemeData(
