@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_recipe/firebase_options.dart';
+import 'package:my_recipe/pages/chef_register_page.dart';
 import 'package:my_recipe/pages/sample_page.dart';
 import 'package:my_recipe/theme.dart';
 
@@ -21,9 +22,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'My Recipe',
       theme: themeData,
-      initialRoute: SampleScreen.path,
+      initialRoute: ChefRegisterPage.path,
       routes: {
         SampleScreen.path: (context) => const SampleScreen(),
+        ChefRegisterPage.path: (context) => const ChefRegisterPage(),
       },
     );
   }

@@ -13,6 +13,8 @@ const _h1TextStyle = TextStyle(
 
 const _primaryColor = Color(0xff324E97);
 
+const fieldBorderRadius = BorderRadius.all(Radius.circular(8));
+
 var themeData = ThemeData(
   colorScheme: ColorScheme.fromSwatch(
     backgroundColor: Colors.white,
@@ -54,6 +56,7 @@ var themeData = ThemeData(
         color: Colors.white,
       ),
       shape: _buttonBorderShape,
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
     ),
   ),
   outlinedButtonTheme: OutlinedButtonThemeData(
