@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_recipe/theme.dart';
 import 'package:my_recipe/widgets/chef_list_item.dart';
 
 class ChefsListPage extends StatelessWidget {
@@ -13,9 +14,15 @@ class ChefsListPage extends StatelessWidget {
         title: const Text('Chefs'),
       ),
       body: ListView.builder(
-        itemCount: 5,
+        itemCount: 7,
         itemBuilder: (context, index) {
-          return const ChefListItem();
+          return const Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: pagePaddingHorizental,
+              vertical: 8,
+            ),
+            child: ChefListItem(),
+          );
         },
       ),
     );

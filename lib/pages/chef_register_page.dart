@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_recipe/theme.dart';
 import 'package:my_recipe/widgets/chef_fields.dart';
 
 class ChefRegisterPage extends StatelessWidget {
@@ -17,7 +18,7 @@ class ChefRegisterPage extends StatelessWidget {
       ),
       body: const SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30),
+          padding: EdgeInsets.symmetric(horizontal: pagePaddingHorizental),
           child: ChefFields(),
         ),
       ),
