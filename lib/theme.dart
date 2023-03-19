@@ -20,6 +20,8 @@ const listItemBorderRadius = fieldBorderRadius;
 
 const pagePaddingHorizental = 30.0;
 
+const formButtonWidth = 90.0;
+
 var themeData = ThemeData(
   colorScheme: ColorScheme.fromSwatch(
     backgroundColor: Colors.white,
