@@ -3,6 +3,7 @@ import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:my_recipe/theme.dart';
 import 'package:my_recipe/widgets/outlined_textfield.dart';
 import 'package:my_recipe/widgets/rounded_dropdown.dart';
+import 'package:my_recipe/widgets/rounded_multiselect.dart';
 
 class ChefFields extends StatelessWidget {
   const ChefFields({Key? key}) : super(key: key);
@@ -67,25 +68,14 @@ class ChefFields extends StatelessWidget {
           onChanged: (value) {},
         ),
         const SizedBox(height: 24),
-        MultiSelectDialogField(
+        RoundedMultiSelect(
           items: [
             MultiSelectItem('Italian', 'Italian'),
             MultiSelectItem('Chinese', 'Chinese'),
           ],
-          title: const Text('Select your cuisine'),
-          buttonText: const Text('Food types'),
-          selectedColor: themeData.colorScheme.primary,
+          title: 'Select your cuisine',
+          buttonText: 'Food types',
           onConfirm: (p0) {},
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.grey,
-            ),
-            borderRadius: fieldBorderRadius,
-          ),
-          buttonIcon: const Icon(
-            Icons.arrow_drop_down,
-            color: Colors.black,
-          ),
         ),
         const SizedBox(height: 30),
         ElevatedButton(
