@@ -18,8 +18,9 @@ class ChefRegisterPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding:
-              const EdgeInsets.symmetric(horizontal: pagePaddingHorizental),
+          padding: const EdgeInsets.symmetric(
+            horizontal: pagePaddingHorizental,
+          ),
           child: Column(
             children: [
               const SizedBox(height: 30),
