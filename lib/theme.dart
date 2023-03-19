@@ -76,6 +76,7 @@ var themeData = ThemeData(
         color: _primaryColor,
         width: 1,
       ),
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
     ),
   ),
 );
