@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:my_recipe/theme.dart';
 import 'package:my_recipe/widgets/outlined_textfield.dart';
+import 'package:my_recipe/widgets/rounded_dropdown.dart';
 
 class ChefFields extends StatelessWidget {
   const ChefFields({Key? key}) : super(key: key);
@@ -48,7 +49,7 @@ class ChefFields extends StatelessWidget {
           hintText: 'Phone number',
         ),
         const SizedBox(height: 24),
-        DropdownButtonFormField<String>(
+        RoundedDropdown<String>(
           items: const [
             DropdownMenuItem(
               value: null,
@@ -64,12 +65,6 @@ class ChefFields extends StatelessWidget {
             ),
           ],
           onChanged: (value) {},
-          isExpanded: true,
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: fieldBorderRadius,
-            ),
-          ),
         ),
         const SizedBox(height: 24),
         MultiSelectDialogField(
