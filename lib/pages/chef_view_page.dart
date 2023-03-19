@@ -38,7 +38,7 @@ class ChefViewPage extends StatelessWidget {
                     width: formButtonWidth,
                     child: ElevatedButton(
                       onPressed: () {},
-                      child: const Text('Register'),
+                      child: const Text('Update'),
                     ),
                   ),
                   SizedBox(
