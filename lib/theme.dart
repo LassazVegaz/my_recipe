@@ -15,6 +15,11 @@ const _primaryColor = Color(0xff324E97);
 
 const fieldBorderRadius = BorderRadius.all(Radius.circular(8));
 
+const listItemBackground = Color.fromARGB(81, 217, 217, 217);
+const listItemBorderRadius = fieldBorderRadius;
+
+const pagePaddingHorizental = 30.0;
+
 var themeData = ThemeData(
   colorScheme: ColorScheme.fromSwatch(
     backgroundColor: Colors.white,
