@@ -14,11 +14,14 @@ const _h1TextStyle = TextStyle(
 const _primaryColor = Color(0xff324E97);
 
 const fieldBorderRadius = BorderRadius.all(Radius.circular(8));
+const fieldVerticalGap = 24.0;
 
 const listItemBackground = Color.fromARGB(81, 217, 217, 217);
 const listItemBorderRadius = fieldBorderRadius;
 
 const pagePaddingHorizental = 30.0;
+
+const formButtonWidth = 90.0;
 
 var themeData = ThemeData(
   colorScheme: ColorScheme.fromSwatch(
@@ -76,6 +79,7 @@ var themeData = ThemeData(
         color: _primaryColor,
         width: 1,
       ),
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
     ),
   ),
 );
