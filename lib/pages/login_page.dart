@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_recipe/theme.dart';
-import 'package:my_recipe/widgets/chef_fields.dart';
 import 'package:my_recipe/widgets/outlined_textfield.dart';
 
 class LoginPage extends StatelessWidget {
