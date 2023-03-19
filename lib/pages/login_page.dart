@@ -25,7 +25,7 @@ class LoginPage extends StatelessWidget {
             const OutlinedTextField(
               hintText: 'Email',
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: fieldVerticalGap),
             const OutlinedTextField(
               hintText: 'Password',
             ),

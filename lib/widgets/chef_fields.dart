@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
+import 'package:my_recipe/theme.dart';
 import 'package:my_recipe/widgets/outlined_textfield.dart';
 import 'package:my_recipe/widgets/rounded_dropdown.dart';
 import 'package:my_recipe/widgets/rounded_multiselect.dart';
@@ -31,23 +32,23 @@ class ChefFields extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: fieldVerticalGap),
         const OutlinedTextField(
           hintText: 'Email',
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: fieldVerticalGap),
         const OutlinedTextField(
           hintText: 'Password',
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: fieldVerticalGap),
         const OutlinedTextField(
           hintText: 'Confirm password',
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: fieldVerticalGap),
         const OutlinedTextField(
           hintText: 'Phone number',
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: fieldVerticalGap),
         RoundedDropdown<String>(
           items: const [
             DropdownMenuItem(
@@ -65,7 +66,7 @@ class ChefFields extends StatelessWidget {
           ],
           onChanged: (value) {},
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: fieldVerticalGap),
         RoundedMultiSelect(
           items: [
             MultiSelectItem('Italian', 'Italian'),
