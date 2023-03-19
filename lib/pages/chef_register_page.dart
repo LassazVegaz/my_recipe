@@ -16,10 +16,37 @@ class ChefRegisterPage extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: pagePaddingHorizental),
-          child: ChefFields(),
+          padding:
+              const EdgeInsets.symmetric(horizontal: pagePaddingHorizental),
+          child: Column(
+            children: [
+              const SizedBox(height: 30),
+              const ChefFields(),
+              const SizedBox(height: 30),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('Register'),
+              ),
+              const SizedBox(height: 15),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text('Already have an account?'),
+                  SizedBox(width: 8),
+                  Text(
+                    'Login',
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 30),
+            ],
+          ),
         ),
       ),
     );

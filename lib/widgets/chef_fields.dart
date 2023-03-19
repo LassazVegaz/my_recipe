@@ -11,7 +11,6 @@ class ChefFields extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 30),
         const CircleAvatar(
           radius: 75,
           backgroundImage: AssetImage('assets/chef.jpg'),
@@ -76,27 +75,6 @@ class ChefFields extends StatelessWidget {
           buttonText: 'Food types',
           onConfirm: (p0) {},
         ),
-        const SizedBox(height: 30),
-        ElevatedButton(
-          onPressed: () {},
-          child: const Text('Register'),
-        ),
-        const SizedBox(height: 15),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text('Already have an account?'),
-            SizedBox(width: 8),
-            Text(
-              'Login',
-              style: TextStyle(
-                color: Colors.blue,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 30),
       ],
     );
   }
