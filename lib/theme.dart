@@ -11,7 +11,7 @@ const _h1TextStyle = TextStyle(
   color: Colors.black,
 );
 
-const _primaryColor = Color(0xff324E97);
+const primaryColor = Color(0xff324E97);
 
 const fieldBorderRadius = BorderRadius.all(Radius.circular(8));
 const fieldVerticalGap = 24.0;
@@ -27,7 +27,7 @@ var themeData = ThemeData(
   colorScheme: ColorScheme.fromSwatch(
     backgroundColor: Colors.white,
   ).copyWith(
-    primary: _primaryColor,
+    primary: primaryColor,
     secondary: const Color(0xff973232),
   ),
   textTheme: const TextTheme(
@@ -72,11 +72,11 @@ var themeData = ThemeData(
       textStyle: const TextStyle(
         fontSize: 13,
         fontWeight: FontWeight.w700,
-        color: _primaryColor,
+        color: primaryColor,
       ),
       shape: _buttonBorderShape,
       side: const BorderSide(
-        color: _primaryColor,
+        color: primaryColor,
         width: 1,
       ),
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
