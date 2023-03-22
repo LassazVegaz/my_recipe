@@ -87,9 +87,23 @@ class UserRegisterPage extends StatelessWidget {
             Positioned(
               top: _avatarMarginTop,
               left: MediaQuery.of(context).size.width / 2 - _avatarRadius,
-              child: const CircleAvatar(
-                radius: _avatarRadius,
-                backgroundImage: AssetImage('assets/user.png'),
+              child: Container(
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: primaryColor,
+                      blurRadius: 15,
+                      offset: Offset(0, 0),
+                      spreadRadius: 2,
+                    ),
+                  ],
+                ),
+                child: const CircleAvatar(
+                  radius: _avatarRadius,
+                  backgroundImage: AssetImage('assets/user.png'),
+                ),
               ),
             ),
           ],
