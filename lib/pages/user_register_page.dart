@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_recipe/theme.dart';
+import 'package:my_recipe/widgets/gender_field.dart';
 import 'package:my_recipe/widgets/outlined_textfield.dart';
 
 class UserRegisterPage extends StatelessWidget {
@@ -49,6 +50,8 @@ class UserRegisterPage extends StatelessWidget {
                     const OutlinedTextField(hintText: 'Phone number'),
                     const SizedBox(height: 30),
                     const OutlinedTextField(hintText: 'Address'),
+                    const SizedBox(height: 30),
+                    const GenderField(),
                     const SizedBox(height: 50),
                     SizedBox(
                       width: formButtonWidth,
