@@ -4,8 +4,8 @@ class NormalUser {
   String email;
   String phone;
   String address;
-  String image;
   String gender;
+  String? image;
 
   NormalUser({
     this.id,
@@ -13,8 +13,8 @@ class NormalUser {
     required this.email,
     required this.phone,
     required this.address,
-    required this.image,
     required this.gender,
+    this.image,
   });
 
   factory NormalUser.fromJson(Map<String, dynamic> json) => NormalUser(
