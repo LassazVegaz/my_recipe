@@ -3,8 +3,8 @@ import 'package:my_recipe/theme.dart';
 import 'package:my_recipe/widgets/user_fields.dart';
 
 // margin top ratio of the fields container with respect to the screen height
-const _marginTopR = 0.4;
-const _fieldsContainerHeightR = 0.55; // with respect to the screen height
+const _marginTopR = 0.47;
+const _fieldsContainerHeightR = 0.48; // with respect to the screen height
 // extra image height that goes below the fields container
 const _extraImageHeight = 100;
 // border radius of fields container
@@ -35,10 +35,6 @@ class UserViewPage extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text(
-          'Hiru Weerasinghe',
-          style: Theme.of(context).textTheme.headline2,
-        ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
       ),
