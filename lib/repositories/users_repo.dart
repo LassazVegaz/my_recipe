@@ -21,12 +21,12 @@ class UsersRepository {
 
   Future<NormalUser?> getUser(String id) async {
     var doc = await _ff.collection(_colName).doc(id).get();
-    if (doc.exists) {
-      var user = NormalUser.fromJson(doc.data()!);
-      user.id = doc.id;
-      return user;
-    }
-    return null;
+
+    if (!doc.exists) return null;
+
+    var user = NormalUser.fromJson(doc.data()!);
+    user.id = doc.id;
+    return user;
   }
 
   Future<void> updateUser(NormalUser user) async {
