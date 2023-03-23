@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_recipe/theme.dart';
-import 'package:my_recipe/widgets/gender_field.dart';
-import 'package:my_recipe/widgets/outlined_textfield.dart';
+import 'package:my_recipe/widgets/user_fields.dart';
 
 const _avatarRadius = 75.0;
 const _pageMarginTop = 150.0;
@@ -45,19 +44,7 @@ class UserRegisterPage extends StatelessWidget {
                     child: Column(
                       children: [
                         const SizedBox(height: 150),
-                        const OutlinedTextField(hintText: 'Full name'),
-                        const SizedBox(height: 30),
-                        const OutlinedTextField(hintText: 'Email'),
-                        const SizedBox(height: 30),
-                        const OutlinedTextField(hintText: 'Password'),
-                        const SizedBox(height: 30),
-                        const OutlinedTextField(hintText: 'Confirm password'),
-                        const SizedBox(height: 30),
-                        const OutlinedTextField(hintText: 'Phone number'),
-                        const SizedBox(height: 30),
-                        const OutlinedTextField(hintText: 'Address'),
-                        const SizedBox(height: 30),
-                        const GenderField(),
+                        const UserFields(),
                         const SizedBox(height: 50),
                         SizedBox(
                           width: formButtonWidth,

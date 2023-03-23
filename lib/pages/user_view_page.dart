@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:my_recipe/theme.dart';
+import 'package:my_recipe/widgets/user_fields.dart';
 
 // margin top ratio of the fields container with respect to the screen height
 const _marginTopR = 0.4;
 const _fieldsContainerHeightR = 0.45; // with respect to the screen height
 // extra image height that goes below the fields container
 const _extraImageHeight = 50;
+// border radius of fields container
+const _fieldsContainerBorderRadius = 30.0;
+// form button radius
+const _buttonRadius = Radius.circular(
+  _fieldsContainerBorderRadius,
+);
+// form button padding
+const _buttonPadding = EdgeInsets.symmetric(
+  vertical: 25,
+);
 
 class UserViewPage extends StatelessWidget {
   static const path = '/user_view';
@@ -61,20 +72,71 @@ class UserViewPage extends StatelessWidget {
                 width: fieldsContainerWidth,
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 191, 193, 205),
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius:
+                      BorderRadius.circular(_fieldsContainerBorderRadius),
                 ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: const [
-                      Text("Hello"),
-                    ],
-                  ),
+                child: Column(
+                  children: const [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 40,
+                          horizontal: 20,
+                        ),
+                        child: UserFields(),
+                      ),
+                    ),
+                    FormButtons(),
+                  ],
                 ),
               ),
             ),
           )
         ],
       ),
+    );
+  }
+}
+
+class FormButtons extends StatelessWidget {
+  const FormButtons({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: _buttonRadius,
+                ),
+              ),
+              padding: _buttonPadding,
+            ),
+            child: const Text('Update'),
+          ),
+        ),
+        Expanded(
+          child: ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              primary: Theme.of(context).colorScheme.secondary,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  bottomRight: _buttonRadius,
+                ),
+              ),
+              padding: _buttonPadding,
+            ),
+            child: const Text('Delete'),
+          ),
+        ),
+      ],
     );
   }
 }
