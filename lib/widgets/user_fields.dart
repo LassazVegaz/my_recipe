@@ -4,6 +4,8 @@ import 'package:my_recipe/widgets/gender_field.dart';
 import 'package:my_recipe/widgets/outlined_textfield.dart';
 
 class UserFields extends StatelessWidget {
+  final void Function(String?)? onGenderChanged;
+
   final TextEditingController? fullNameController,
       emailController,
       passwordController,
@@ -11,7 +13,7 @@ class UserFields extends StatelessWidget {
       phoneNumberController,
       addressController;
   final String? gender;
-  final void Function(String?)? onGenderChanged;
+  final bool isEditing;
 
   const UserFields({
     Key? key,
@@ -23,6 +25,7 @@ class UserFields extends StatelessWidget {
     this.addressController,
     this.gender,
     this.onGenderChanged,
+    this.isEditing = false,
   }) : super(key: key);
 
   @override
@@ -37,26 +40,33 @@ class UserFields extends StatelessWidget {
         OutlinedTextField(
           hintText: 'Email',
           controller: emailController,
+          readOnly: isEditing,
         ),
         const SizedBox(height: fieldVerticalGap),
-        OutlinedTextField(
-          hintText: 'Password',
-          controller: passwordController,
-          obscureText: true,
-        ),
-        const SizedBox(height: fieldVerticalGap),
-        OutlinedTextField(
-          hintText: 'Confirm password',
-          controller: confirmPasswordController,
-          obscureText: true,
-          validator: (value) {
-            if (value != passwordController?.text) {
-              return 'Passwords do not match';
-            }
-            return null;
-          },
-        ),
-        const SizedBox(height: fieldVerticalGap),
+        !isEditing
+            ? Column(
+                children: [
+                  OutlinedTextField(
+                    hintText: 'Password',
+                    controller: passwordController,
+                    obscureText: true,
+                  ),
+                  const SizedBox(height: fieldVerticalGap),
+                  OutlinedTextField(
+                    hintText: 'Confirm password',
+                    controller: confirmPasswordController,
+                    obscureText: true,
+                    validator: (value) {
+                      if (value != passwordController?.text) {
+                        return 'Passwords do not match';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: fieldVerticalGap),
+                ],
+              )
+            : Container(),
         OutlinedTextField(
           hintText: 'Phone number',
           controller: phoneNumberController,

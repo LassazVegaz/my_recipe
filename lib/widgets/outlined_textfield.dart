@@ -8,6 +8,7 @@ class OutlinedTextField extends StatelessWidget {
   final TextEditingController? controller;
   final bool compulsory;
   final bool obscureText;
+  final bool readOnly;
 
   const OutlinedTextField({
     Key? key,
@@ -16,6 +17,7 @@ class OutlinedTextField extends StatelessWidget {
     this.compulsory = true,
     this.validator,
     this.obscureText = false,
+    this.readOnly = false,
   }) : super(key: key);
 
   @override
@@ -23,6 +25,7 @@ class OutlinedTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       obscureText: obscureText,
+      readOnly: readOnly,
       validator: (value) {
         if (compulsory && value!.isEmpty) {
           return 'This field is required';

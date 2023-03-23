@@ -13,10 +13,21 @@ const _extraImageHeight = 100;
 const _fieldsContainerBorderRadius = 30.0;
 const _fieldsContainerPaddingV = pagePaddingHorizental - 8;
 
-class UserViewPage extends StatelessWidget {
+class UserViewPage extends StatefulWidget {
   static const path = '/user_view';
 
   const UserViewPage({Key? key}) : super(key: key);
+
+  @override
+  State<UserViewPage> createState() => _UserViewPageState();
+}
+
+class _UserViewPageState extends State<UserViewPage> {
+  final nameController = TextEditingController(),
+      emailController = TextEditingController(),
+      addressController = TextEditingController(),
+      phoneNumberController = TextEditingController();
+  String? gender;
 
   @override
   Widget build(BuildContext context) {
@@ -61,17 +72,27 @@ class UserViewPage extends StatelessWidget {
                   ),
                 ),
                 child: Column(
-                  children: const [
+                  children: [
                     Expanded(
                       child: SingleChildScrollView(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           vertical: 40,
                           horizontal: 20,
                         ),
-                        child: UserFields(),
+                        child: UserFields(
+                          isEditing: true,
+                          fullNameController: nameController,
+                          emailController: emailController,
+                          addressController: addressController,
+                          phoneNumberController: phoneNumberController,
+                          gender: gender,
+                          onGenderChanged: (g) => setState(() => gender = g),
+                        ),
                       ),
                     ),
-                    FormButtons(buttonRadius: _fieldsContainerBorderRadius),
+                    const FormButtons(
+                      buttonRadius: _fieldsContainerBorderRadius,
+                    ),
                   ],
                 ),
               ),
