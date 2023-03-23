@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:my_recipe/theme.dart';
 
 class OutlinedTextField extends StatelessWidget {
+  final String? Function(String?)? validator;
+
   final String? hintText;
   final TextEditingController? controller;
   final bool compulsory;
@@ -11,6 +13,7 @@ class OutlinedTextField extends StatelessWidget {
     this.hintText,
     this.controller,
     this.compulsory = true,
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -21,10 +24,10 @@ class OutlinedTextField extends StatelessWidget {
         if (compulsory && value!.isEmpty) {
           return 'This field is required';
         }
-        return null;
+        return validator?.call(value);
       },
       decoration: InputDecoration(
-        hintText: hintText,
+        label: hintText != null ? Text(hintText!) : null,
         border: const OutlineInputBorder(
           borderRadius: fieldBorderRadius,
         ),
