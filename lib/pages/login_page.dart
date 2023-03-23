@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_recipe/pages/chef_register_page.dart';
-import 'package:my_recipe/pages/user_register_page.dart';
+import 'package:my_recipe/pages/user_register/user_register_page.dart';
 import 'package:my_recipe/theme.dart';
 import 'package:my_recipe/widgets/outlined_textfield.dart';
 

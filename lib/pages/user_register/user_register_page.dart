@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_recipe/models/user_model.dart';
+import 'package:my_recipe/pages/user_register/widgets/buttons.dart';
+import 'package:my_recipe/pages/user_register/widgets/positioned_profile_pic.dart';
 import 'package:my_recipe/repositories/users_repo.dart';
 import 'package:my_recipe/theme.dart';
 import 'package:my_recipe/widgets/user_fields.dart';
@@ -130,77 +132,11 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
                 ],
               ),
             ),
-            const PositionedProfilePic(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class Buttons extends StatelessWidget {
-  final VoidCallback? onSignUp;
-
-  const Buttons({
-    Key? key,
-    this.onSignUp,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          width: formButtonWidth,
-          child: ElevatedButton(
-            onPressed: onSignUp,
-            child: const Text('Sign Up'),
-          ),
-        ),
-        const SizedBox(height: 20),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('Already have an account?'),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Sign In'),
+            const PositionedProfilePic(
+              top: _avatarMarginTop,
+              radius: _avatarRadius,
             ),
           ],
-        ),
-      ],
-    );
-  }
-}
-
-class PositionedProfilePic extends StatelessWidget {
-  const PositionedProfilePic({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      top: _avatarMarginTop,
-      left: MediaQuery.of(context).size.width / 2 - _avatarRadius,
-      child: Container(
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: primaryColor,
-              blurRadius: 15,
-              offset: Offset(0, 0),
-              spreadRadius: 2,
-            ),
-          ],
-        ),
-        child: const CircleAvatar(
-          radius: _avatarRadius,
-          backgroundImage: AssetImage('assets/user.png'),
         ),
       ),
     );
