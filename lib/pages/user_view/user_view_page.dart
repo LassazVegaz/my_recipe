@@ -62,6 +62,9 @@ class _UserViewPageState extends State<UserViewPage> {
         MediaQuery.of(context).size.height * _fieldsContainerHeightR;
     final fieldsContainerWidth =
         MediaQuery.of(context).size.width - (_fieldsContainerPaddingV * 2);
+    final imageHeight = fieldsContainerTopMargin + _extraImageHeight;
+    final boxBelowImageHeight = MediaQuery.of(context).size.height -
+        (fieldsContainerTopMargin + _extraImageHeight);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -71,56 +74,64 @@ class _UserViewPageState extends State<UserViewPage> {
       ),
       body: Stack(
         children: [
-          Column(
-            children: [
-              ProfilePicture(
-                height: fieldsContainerTopMargin + _extraImageHeight,
-              ),
-              Expanded(
-                child: Container(),
-              ),
-            ],
-          ),
-          Positioned(
-            top: fieldsContainerTopMargin,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: _fieldsContainerPaddingV,
-              ),
-              child: Container(
-                height: fieldsContainerHeight,
-                width: fieldsContainerWidth,
-                decoration: BoxDecoration(
-                  color: const Color(0xFFF2F3FA),
-                  borderRadius: BorderRadius.circular(
-                    _fieldsContainerBorderRadius,
-                  ),
+          SingleChildScrollView(
+            physics: const NeverScrollableScrollPhysics(),
+            child: Column(
+              children: [
+                ProfilePicture(
+                  height: imageHeight,
                 ),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: SingleChildScrollView(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 40,
-                          horizontal: 20,
-                        ),
-                        child: UserFields(
-                          isEditing: true,
-                          fullNameController: nameController,
-                          emailController: emailController,
-                          addressController: addressController,
-                          phoneNumberController: phoneNumberController,
-                          gender: gender,
-                          onGenderChanged: (g) => setState(() => gender = g),
-                        ),
+                SizedBox(
+                  height: boxBelowImageHeight,
+                ),
+              ],
+            ),
+          ),
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(height: fieldsContainerTopMargin),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: _fieldsContainerPaddingV,
+                  ),
+                  child: Container(
+                    height: fieldsContainerHeight,
+                    width: fieldsContainerWidth,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF2F3FA),
+                      borderRadius: BorderRadius.circular(
+                        _fieldsContainerBorderRadius,
                       ),
                     ),
-                    const FormButtons(
-                      buttonRadius: _fieldsContainerBorderRadius,
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: SingleChildScrollView(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 40,
+                              horizontal: 20,
+                            ),
+                            child: UserFields(
+                              isEditing: true,
+                              fullNameController: nameController,
+                              emailController: emailController,
+                              addressController: addressController,
+                              phoneNumberController: phoneNumberController,
+                              gender: gender,
+                              onGenderChanged: (g) =>
+                                  setState(() => gender = g),
+                            ),
+                          ),
+                        ),
+                        const FormButtons(
+                          buttonRadius: _fieldsContainerBorderRadius,
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
           )
         ],
