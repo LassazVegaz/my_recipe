@@ -9,6 +9,8 @@ class UserFields extends StatelessWidget {
       confirmPasswordController,
       phoneNumberController,
       addressController;
+  final String? gender;
+  final void Function(String?)? onGenderChanged;
 
   const UserFields({
     Key? key,
@@ -18,6 +20,8 @@ class UserFields extends StatelessWidget {
     this.confirmPasswordController,
     this.phoneNumberController,
     this.addressController,
+    this.gender,
+    this.onGenderChanged,
   }) : super(key: key);
 
   @override
@@ -54,7 +58,10 @@ class UserFields extends StatelessWidget {
           controller: addressController,
         ),
         const SizedBox(height: 30),
-        const GenderField(),
+        GenderField(
+          onChanged: onGenderChanged,
+          value: gender,
+        ),
       ],
     );
   }

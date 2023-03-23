@@ -32,16 +32,20 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
       _phoneNumberController = TextEditingController(),
       _addressController = TextEditingController();
 
+  String? gender;
+
+  NormalUser _buildUser() => NormalUser(
+        name: _nameController.text,
+        email: _emailController.text,
+        phone: _phoneNumberController.text,
+        address: _addressController.text,
+        gender: gender!,
+      );
+
   void _onSignUpClick(BuildContext context) async {
     if (!_formKey.currentState!.validate()) return;
 
-    var user = NormalUser(
-      name: _nameController.text,
-      email: _emailController.text,
-      phone: _phoneNumberController.text,
-      address: _addressController.text,
-      gender: "male",
-    );
+    var user = _buildUser();
 
     try {
       await _usersRepo.createUser(user, _passwordController.text);
@@ -119,6 +123,8 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
                                 _confirmPasswordController,
                             phoneNumberController: _phoneNumberController,
                             addressController: _addressController,
+                            gender: gender,
+                            onGenderChanged: (g) => setState(() => gender = g),
                           ),
                           const SizedBox(height: 50),
                           Buttons(
