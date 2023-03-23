@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_recipe/models/user_model.dart';
 import 'package:my_recipe/repositories/users_repo.dart';
@@ -10,18 +11,24 @@ const _avatarMarginTop = _pageMarginTop - _avatarRadius;
 
 final _usersRepo = UsersRepository.instance;
 
-class UserRegisterPage extends StatelessWidget {
+class UserRegisterPage extends StatefulWidget {
   static const path = '/user_register';
 
+  const UserRegisterPage({Key? key}) : super(key: key);
+
+  @override
+  State<UserRegisterPage> createState() => _UserRegisterPageState();
+}
+
+class _UserRegisterPageState extends State<UserRegisterPage> {
   final _formKey = GlobalKey<FormState>();
+
   final _nameController = TextEditingController(),
       _emailController = TextEditingController(),
       _passwordController = TextEditingController(),
       _confirmPasswordController = TextEditingController(),
       _phoneNumberController = TextEditingController(),
       _addressController = TextEditingController();
-
-  UserRegisterPage({Key? key}) : super(key: key);
 
   void _onSignUpClick(BuildContext context) async {
     if (!_formKey.currentState!.validate()) return;
@@ -34,7 +41,33 @@ class UserRegisterPage extends StatelessWidget {
       gender: "male",
     );
 
-    await _usersRepo.createUser(user, _passwordController.text);
+    try {
+      await _usersRepo.createUser(user, _passwordController.text);
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Account created successfully'),
+          ),
+        );
+        Navigator.of(context).pushNamedAndRemoveUntil(
+          '/home',
+          (route) => false,
+        );
+      }
+    } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.message!),
+        ),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Something went wrong. Please try again'),
+        ),
+      );
+    }
   }
 
   @override
