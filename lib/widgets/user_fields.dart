@@ -41,11 +41,13 @@ class UserFields extends StatelessWidget {
         OutlinedTextField(
           hintText: 'Password',
           controller: passwordController,
+          obscureText: true,
         ),
         const SizedBox(height: 30),
         OutlinedTextField(
           hintText: 'Confirm password',
           controller: confirmPasswordController,
+          obscureText: true,
           validator: (value) {
             if (value != passwordController?.text) {
               return 'Passwords do not match';
