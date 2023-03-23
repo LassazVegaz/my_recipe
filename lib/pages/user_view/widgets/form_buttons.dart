@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 const _buttonPadding = EdgeInsets.symmetric(
-  vertical: 18,
+  vertical: 15,
 );
 
 class FormButtons extends StatelessWidget {

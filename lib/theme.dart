@@ -88,7 +88,7 @@ var themeData = ThemeData(
       borderRadius: fieldBorderRadius,
     ),
     contentPadding: EdgeInsets.symmetric(
-      vertical: 9,
+      vertical: 4,
       horizontal: 16,
     ),
   ),

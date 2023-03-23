@@ -11,6 +11,7 @@ const _fieldsContainerHeightR = 0.48; // with respect to the screen height
 const _extraImageHeight = 100;
 // border radius of fields container
 const _fieldsContainerBorderRadius = 30.0;
+const _fieldsContainerPaddingV = pagePaddingHorizental - 8;
 
 class UserViewPage extends StatelessWidget {
   static const path = '/user_view';
@@ -24,7 +25,7 @@ class UserViewPage extends StatelessWidget {
     final fieldsContainerHeight =
         MediaQuery.of(context).size.height * _fieldsContainerHeightR;
     final fieldsContainerWidth =
-        MediaQuery.of(context).size.width - (pagePaddingHorizental * 2);
+        MediaQuery.of(context).size.width - (_fieldsContainerPaddingV * 2);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -48,7 +49,7 @@ class UserViewPage extends StatelessWidget {
             top: fieldsContainerTopMargin,
             child: Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: pagePaddingHorizental,
+                horizontal: _fieldsContainerPaddingV,
               ),
               child: Container(
                 height: fieldsContainerHeight,

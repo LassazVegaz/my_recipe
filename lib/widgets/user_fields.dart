@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_recipe/theme.dart';
 import 'package:my_recipe/widgets/gender_field.dart';
 import 'package:my_recipe/widgets/outlined_textfield.dart';
 
@@ -32,18 +33,18 @@ class UserFields extends StatelessWidget {
           hintText: 'Full name',
           controller: fullNameController,
         ),
-        const SizedBox(height: 30),
+        const SizedBox(height: fieldVerticalGap),
         OutlinedTextField(
           hintText: 'Email',
           controller: emailController,
         ),
-        const SizedBox(height: 30),
+        const SizedBox(height: fieldVerticalGap),
         OutlinedTextField(
           hintText: 'Password',
           controller: passwordController,
           obscureText: true,
         ),
-        const SizedBox(height: 30),
+        const SizedBox(height: fieldVerticalGap),
         OutlinedTextField(
           hintText: 'Confirm password',
           controller: confirmPasswordController,
@@ -55,17 +56,17 @@ class UserFields extends StatelessWidget {
             return null;
           },
         ),
-        const SizedBox(height: 30),
+        const SizedBox(height: fieldVerticalGap),
         OutlinedTextField(
           hintText: 'Phone number',
           controller: phoneNumberController,
         ),
-        const SizedBox(height: 30),
+        const SizedBox(height: fieldVerticalGap),
         OutlinedTextField(
           hintText: 'Address',
           controller: addressController,
         ),
-        const SizedBox(height: 30),
+        const SizedBox(height: fieldVerticalGap),
         GenderField(
           onChanged: onGenderChanged,
           value: gender,
