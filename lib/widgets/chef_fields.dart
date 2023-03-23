@@ -3,7 +3,6 @@ import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:my_recipe/theme.dart';
 import 'package:my_recipe/widgets/gender_field.dart';
 import 'package:my_recipe/widgets/outlined_textfield.dart';
-import 'package:my_recipe/widgets/rounded_dropdown.dart';
 import 'package:my_recipe/widgets/rounded_multiselect.dart';
 
 class ChefFields extends StatelessWidget {
