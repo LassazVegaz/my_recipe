@@ -6,7 +6,7 @@ import 'package:my_recipe/widgets/user_fields.dart';
 const _marginTopR = 0.4;
 const _fieldsContainerHeightR = 0.55; // with respect to the screen height
 // extra image height that goes below the fields container
-const _extraImageHeight = 80;
+const _extraImageHeight = 100;
 // border radius of fields container
 const _fieldsContainerBorderRadius = 30.0;
 // form button radius
@@ -41,23 +41,41 @@ class UserViewPage extends StatelessWidget {
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
-        elevation: 0,
       ),
       body: Stack(
         children: [
           Column(
             children: [
-              Image.asset(
-                "assets/temp_1.jpg",
-                height: fieldsContainerTopMargin + _extraImageHeight,
-                width: double.infinity,
-                fit: BoxFit.fitWidth,
-                alignment: Alignment.topCenter,
+              ShaderMask(
+                shaderCallback: (rect) {
+                  return const LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.black,
+                      Colors.transparent,
+                    ],
+                    stops: [0.8, 1],
+                  ).createShader(
+                    Rect.fromLTRB(
+                      0,
+                      0,
+                      rect.width,
+                      rect.height,
+                    ),
+                  );
+                },
+                blendMode: BlendMode.dstIn,
+                child: Image.asset(
+                  "assets/temp_1.jpg",
+                  height: fieldsContainerTopMargin + _extraImageHeight,
+                  width: double.infinity,
+                  fit: BoxFit.fitWidth,
+                  alignment: Alignment.topCenter,
+                ),
               ),
               Expanded(
-                child: Container(
-                  color: const Color.fromARGB(255, 218, 220, 231),
-                ),
+                child: Container(),
               ),
             ],
           ),
@@ -71,7 +89,7 @@ class UserViewPage extends StatelessWidget {
                 height: fieldsContainerHeight,
                 width: fieldsContainerWidth,
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 191, 193, 205),
+                  color: const Color(0xFFF2F3FA),
                   borderRadius:
                       BorderRadius.circular(_fieldsContainerBorderRadius),
                 ),
