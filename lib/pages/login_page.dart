@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:my_recipe/pages/chef_register_page.dart';
+import 'package:my_recipe/pages/user_register_page.dart';
 import 'package:my_recipe/theme.dart';
 import 'package:my_recipe/widgets/outlined_textfield.dart';
 
 // ratios of gaps respect to the screen height
-const _gap1R = 0.18; // start and email field
+const _gap1R = 0.07; // start and email field
 const _gap2R = 0.13; // password field and login button
 
 class LoginPage extends StatelessWidget {
@@ -46,16 +48,28 @@ class LoginPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   Text('Don\'t have an account?'),
-                  SizedBox(width: 8),
-                  Text(
-                    'Register',
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
                 ],
               ),
+              const SizedBox(height: 15),
+              SizedBox(
+                width: 180,
+                child: OutlinedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, ChefRegisterPage.path);
+                  },
+                  child: const Text('Register as a Chef'),
+                ),
+              ),
+              SizedBox(
+                width: 180,
+                child: OutlinedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, UserRegisterPage.path);
+                  },
+                  child: const Text('Register as a Foodaholic'),
+                ),
+              ),
+              const SizedBox(height: 10),
             ],
           ),
         ),
