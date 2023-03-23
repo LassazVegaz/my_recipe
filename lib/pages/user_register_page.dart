@@ -16,8 +16,12 @@ class UserRegisterPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Sign Up',
-          style: TextStyle(color: Colors.white),
+          'Create Account',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w700,
+            fontSize: 24,
+          ),
         ),
         centerTitle: true,
         backgroundColor: primaryColor,
@@ -59,7 +63,9 @@ class UserRegisterPage extends StatelessWidget {
                           children: [
                             const Text('Already have an account?'),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
                               child: const Text('Sign In'),
                             ),
                           ],
