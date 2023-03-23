@@ -4,9 +4,9 @@ import 'package:my_recipe/widgets/user_fields.dart';
 
 // margin top ratio of the fields container with respect to the screen height
 const _marginTopR = 0.4;
-const _fieldsContainerHeightR = 0.45; // with respect to the screen height
+const _fieldsContainerHeightR = 0.55; // with respect to the screen height
 // extra image height that goes below the fields container
-const _extraImageHeight = 50;
+const _extraImageHeight = 80;
 // border radius of fields container
 const _fieldsContainerBorderRadius = 30.0;
 // form button radius
