@@ -14,20 +14,23 @@ class UserViewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var fieldsContainerTopMargin =
+    final fieldsContainerTopMargin =
         MediaQuery.of(context).size.height * _marginTopR;
-    var fieldsContainerHeight =
+    final fieldsContainerHeight =
         MediaQuery.of(context).size.height * _fieldsContainerHeightR;
-    var fieldsContainerWidth =
+    final fieldsContainerWidth =
         MediaQuery.of(context).size.width - (pagePaddingHorizental * 2);
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(
           'Hiru Weerasinghe',
           style: Theme.of(context).textTheme.headline2,
         ),
         centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
       body: Stack(
         children: [
@@ -57,9 +60,8 @@ class UserViewPage extends StatelessWidget {
                 height: fieldsContainerHeight,
                 width: fieldsContainerWidth,
                 decoration: BoxDecoration(
-                  // color: const Color.fromARGB(255, 218, 220, 231),
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(10),
+                  color: const Color.fromARGB(255, 191, 193, 205),
+                  borderRadius: BorderRadius.circular(30),
                 ),
                 child: SingleChildScrollView(
                   child: Column(
