@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:my_recipe/pages/user_view/widgets/form_buttons.dart';
 import 'package:my_recipe/pages/user_view/widgets/profile_picture.dart';
+import 'package:my_recipe/repositories/users_repo.dart';
 import 'package:my_recipe/theme.dart';
 import 'package:my_recipe/widgets/user_fields.dart';
+
+// hard coded ID of the user to be displayed
+const _userId = 'U7hS6hf8KkeTpISEK9rp9sBAgch1';
 
 // margin top ratio of the fields container with respect to the screen height
 const _marginTopR = 0.47;
@@ -12,6 +16,8 @@ const _extraImageHeight = 100;
 // border radius of fields container
 const _fieldsContainerBorderRadius = 30.0;
 const _fieldsContainerPaddingV = pagePaddingHorizental - 8;
+
+final _usersRepo = UsersRepository.instance;
 
 class UserViewPage extends StatefulWidget {
   static const path = '/user_view';
@@ -28,6 +34,25 @@ class _UserViewPageState extends State<UserViewPage> {
       addressController = TextEditingController(),
       phoneNumberController = TextEditingController();
   String? gender;
+  String uid = '';
+
+  void _fetchUser() async {
+    final user = await _usersRepo.getUser(uid);
+    if (user == null) return;
+    nameController.text = user.name;
+    emailController.text = user.email;
+    addressController.text = user.address;
+    phoneNumberController.text = user.phone;
+    setState(() => gender = user.gender);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    uid = _userId;
+    _fetchUser();
+  }
 
   @override
   Widget build(BuildContext context) {
