@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         ChefsListPage.path: (context) => const ChefsListPage(),
         ChefViewPage.path: (context) => const ChefViewPage(),
         LoginPage.path: (context) => const LoginPage(),
-        UserRegisterPage.path: (context) => const UserRegisterPage(),
+        UserRegisterPage.path: (context) => UserRegisterPage(),
         UsersListPage.path: (context) => const UsersListPage(),
         UserViewPage.path: (context) => const UserViewPage(),
       },

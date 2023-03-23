@@ -10,7 +10,11 @@ final _fs = FirebaseStorage.instance;
 const _colName = 'users';
 
 class UsersRepository {
-  void createUser(NormalUser user, String password) async {
+  // singleton
+  UsersRepository._();
+  static final UsersRepository instance = UsersRepository._();
+
+  Future<void> createUser(NormalUser user, String password) async {
     var fUser = await _fa.createUserWithEmailAndPassword(
       email: user.email,
       password: password,
