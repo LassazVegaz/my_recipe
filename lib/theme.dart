@@ -83,4 +83,13 @@ var themeData = ThemeData(
       padding: _buttonPadding,
     ),
   ),
+  inputDecorationTheme: const InputDecorationTheme(
+    border: OutlineInputBorder(
+      borderRadius: fieldBorderRadius,
+    ),
+    contentPadding: EdgeInsets.symmetric(
+      vertical: 9,
+      horizontal: 16,
+    ),
+  ),
 );
