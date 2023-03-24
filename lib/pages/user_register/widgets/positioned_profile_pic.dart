@@ -31,6 +31,7 @@ class PositionedProfilePic extends StatelessWidget {
         ),
         child: CircleAvatar(
           radius: radius,
+          backgroundColor: Colors.white,
           backgroundImage: const AssetImage('assets/user.png'),
         ),
       ),
