@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:my_recipe/theme.dart';
 import 'package:my_recipe/widgets/gender_field.dart';
+import 'package:my_recipe/widgets/image_selector.dart';
 import 'package:my_recipe/widgets/outlined_textfield.dart';
 import 'package:my_recipe/widgets/rounded_multiselect.dart';
 
@@ -16,6 +17,8 @@ class ChefFields extends StatelessWidget {
       phoneNumberController;
   final String? gender;
   final bool isEditing;
+  final String? image;
+  final void Function(String)? onImageSelected;
 
   const ChefFields({
     Key? key,
@@ -28,15 +31,22 @@ class ChefFields extends StatelessWidget {
     this.onGenderChanged,
     this.gender,
     this.isEditing = false,
+    this.image,
+    this.onImageSelected,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const CircleAvatar(
-          radius: 75,
-          backgroundImage: AssetImage('assets/chef.jpg'),
+        ImageSelector(
+          image: image,
+          defaultAssetImage: 'assets/chef.jpg',
+          onImageSelected: onImageSelected,
+          builder: (image) => CircleAvatar(
+            radius: 75,
+            backgroundImage: image,
+          ),
         ),
         const SizedBox(height: 50),
         Row(

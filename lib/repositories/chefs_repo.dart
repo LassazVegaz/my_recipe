@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:my_recipe/models/chef_model.dart';
 import 'package:my_recipe/repositories/auth_repo.dart';
 
 final _fa = FirebaseAuth.instance;
 final _ff = FirebaseFirestore.instance;
+final _fs = FirebaseStorage.instance;
 final _authRepo = AuthRrepository.instance;
 
 const _colName = 'chefs';
@@ -23,9 +27,11 @@ class ChefsRepository {
     var map = chef.toJson();
     await _ff.collection(_colName).doc(fUser.user!.uid).set(map);
 
+    chef.id = fUser.user!.uid;
+    chef.image = await uploadProfilePicture(chef.id!, chef.image!);
+
     await _authRepo.setRole();
 
-    chef.id = fUser.user!.uid;
     return chef;
   }
 
@@ -68,5 +74,18 @@ class ChefsRepository {
       }).toList();
       yield chefs;
     }
+  }
+
+  Future<String> uploadProfilePicture(String uid, String imgFile) async {
+    var file = File(imgFile);
+    var fileExt = file.path.split('.').last;
+
+    var ref = _fs.ref().child('profile_pictures/$uid.$fileExt');
+    await ref.putFile(file);
+
+    var url = await ref.getDownloadURL();
+    await _ff.collection(_colName).doc(uid).update({'image': url});
+
+    return url;
   }
 }

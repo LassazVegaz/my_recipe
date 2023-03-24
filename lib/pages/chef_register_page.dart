@@ -26,6 +26,7 @@ class _ChefRegisterPageState extends State<ChefRegisterPage> {
       _confirmPasswordController = TextEditingController(),
       _phoneNumberController = TextEditingController();
   String? gender;
+  String? image;
   List<String> foodTypes = [];
 
   Chef _buildChef() => Chef(
@@ -35,6 +36,7 @@ class _ChefRegisterPageState extends State<ChefRegisterPage> {
         phone: _phoneNumberController.text,
         gender: gender!,
         foodTypes: foodTypes,
+        image: image,
       );
 
   void _onRegisterClick(BuildContext context) async {
@@ -101,6 +103,8 @@ class _ChefRegisterPageState extends State<ChefRegisterPage> {
                   phoneNumberController: _phoneNumberController,
                   gender: gender,
                   onGenderChanged: (g) => setState(() => gender = g),
+                  image: image,
+                  onImageSelected: (i) => setState(() => image = i),
                 ),
                 const SizedBox(height: 30),
                 ElevatedButton(
