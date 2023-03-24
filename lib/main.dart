@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_recipe/firebase_options.dart';
 import 'package:my_recipe/pages/chef_register_page.dart';
-import 'package:my_recipe/pages/chef_view_page.dart';
+import 'package:my_recipe/pages/chef_view/chef_view_page.dart';
 import 'package:my_recipe/pages/chefs_list_page.dart';
 import 'package:my_recipe/pages/login_page.dart';
 import 'package:my_recipe/pages/sample_page.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_recipe/models/chef_model.dart';
-import 'package:my_recipe/pages/chef_view_page.dart';
+import 'package:my_recipe/pages/chef_view/chef_view_page.dart';
 import 'package:my_recipe/theme.dart';
 
 class ChefListItem extends StatelessWidget {
