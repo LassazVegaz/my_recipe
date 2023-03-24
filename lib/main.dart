@@ -6,6 +6,7 @@ import 'package:my_recipe/pages/chef_view/chef_view_page.dart';
 import 'package:my_recipe/pages/chefs_list_page.dart';
 import 'package:my_recipe/pages/login_page.dart';
 import 'package:my_recipe/pages/sample_page.dart';
+import 'package:my_recipe/pages/user_home_page.dart';
 import 'package:my_recipe/pages/user_register/user_register_page.dart';
 import 'package:my_recipe/pages/user_view/user_view_page.dart';
 import 'package:my_recipe/pages/users_list/users_list_page.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         UserRegisterPage.path: (context) => const UserRegisterPage(),
         UsersListPage.path: (context) => const UsersListPage(),
         UserViewPage.path: (context) => const UserViewPage(),
+        UserHomePage.path: (context) => const UserHomePage(),
       },
     );
   }
