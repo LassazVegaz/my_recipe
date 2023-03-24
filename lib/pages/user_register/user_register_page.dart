@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_recipe/models/user_model.dart';
+import 'package:my_recipe/pages/user_home_page.dart';
 import 'package:my_recipe/pages/user_register/widgets/buttons.dart';
 import 'package:my_recipe/pages/user_register/widgets/positioned_profile_pic.dart';
 import 'package:my_recipe/repositories/users_repo.dart';
@@ -56,10 +57,8 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
             content: Text('Account created successfully'),
           ),
         );
-        Navigator.of(context).pushNamedAndRemoveUntil(
-          '/home',
-          (route) => false,
-        );
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil(UserHomePage.path, (route) => false);
       }
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
