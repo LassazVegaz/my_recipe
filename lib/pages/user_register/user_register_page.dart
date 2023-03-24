@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_recipe/models/user_model.dart';
+import 'package:my_recipe/pages/user_home_page.dart';
 import 'package:my_recipe/pages/user_register/widgets/buttons.dart';
 import 'package:my_recipe/pages/user_register/widgets/positioned_profile_pic.dart';
-import 'package:my_recipe/pages/user_view/user_view_page.dart';
 import 'package:my_recipe/repositories/users_repo.dart';
 import 'package:my_recipe/theme.dart';
 import 'package:my_recipe/widgets/user_fields.dart';
@@ -49,8 +49,7 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
     var user = _buildUser();
 
     try {
-      final newUser =
-          await _usersRepo.createUser(user, _passwordController.text);
+      await _usersRepo.createUser(user, _passwordController.text);
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -58,11 +57,8 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
             content: Text('Account created successfully'),
           ),
         );
-        Navigator.of(context).pushNamedAndRemoveUntil(
-          UserViewPage.path,
-          (route) => false,
-          arguments: newUser.id,
-        );
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil(UserHomePage.path, (route) => false);
       }
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
