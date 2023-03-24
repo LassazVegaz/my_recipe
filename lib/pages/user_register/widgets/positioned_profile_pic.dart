@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:my_recipe/theme.dart';
 
-class PositionedProfilePic extends StatelessWidget {
+class PositionedProfilePic extends StatefulWidget {
   final double top;
   final double radius;
 
@@ -12,10 +15,17 @@ class PositionedProfilePic extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<PositionedProfilePic> createState() => _PositionedProfilePicState();
+}
+
+class _PositionedProfilePicState extends State<PositionedProfilePic> {
+  String? file;
+
+  @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: top,
-      left: MediaQuery.of(context).size.width / 2 - radius,
+      top: widget.top,
+      left: MediaQuery.of(context).size.width / 2 - widget.radius,
       child: Container(
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
@@ -29,10 +39,24 @@ class PositionedProfilePic extends StatelessWidget {
             ),
           ],
         ),
-        child: CircleAvatar(
-          radius: radius,
-          backgroundColor: Colors.white,
-          backgroundImage: const AssetImage('assets/user.png'),
+        child: GestureDetector(
+          onTap: () async {
+            final pickedFile = await ImagePicker().pickImage(
+              source: ImageSource.gallery,
+            );
+            if (pickedFile != null) {
+              setState(() {
+                file = pickedFile.path;
+              });
+            }
+          },
+          child: CircleAvatar(
+            radius: widget.radius,
+            backgroundColor: Colors.white,
+            backgroundImage: file != null
+                ? Image.file(File(file!)).image
+                : Image.asset("assets/user.png").image,
+          ),
         ),
       ),
     );
