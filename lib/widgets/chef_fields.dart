@@ -6,7 +6,27 @@ import 'package:my_recipe/widgets/outlined_textfield.dart';
 import 'package:my_recipe/widgets/rounded_multiselect.dart';
 
 class ChefFields extends StatelessWidget {
-  const ChefFields({Key? key}) : super(key: key);
+  final void Function(String?)? onGenderChanged;
+
+  final TextEditingController? firstNameController,
+      lastNameController,
+      emailController,
+      passwordController,
+      confirmPasswordController,
+      phoneNumberController;
+  final String? gender;
+
+  const ChefFields({
+    Key? key,
+    this.firstNameController,
+    this.lastNameController,
+    this.emailController,
+    this.passwordController,
+    this.confirmPasswordController,
+    this.phoneNumberController,
+    this.onGenderChanged,
+    this.gender,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,38 +38,55 @@ class ChefFields extends StatelessWidget {
         ),
         const SizedBox(height: 50),
         Row(
-          children: const [
+          children: [
             Expanded(
               child: OutlinedTextField(
                 hintText: 'First name',
+                controller: firstNameController,
               ),
             ),
             SizedBox(width: 32),
             Expanded(
               child: OutlinedTextField(
                 hintText: 'Last name',
+                controller: lastNameController,
               ),
             ),
           ],
         ),
         const SizedBox(height: fieldVerticalGap),
-        const OutlinedTextField(
+        OutlinedTextField(
           hintText: 'Email',
+          controller: emailController,
         ),
         const SizedBox(height: fieldVerticalGap),
-        const OutlinedTextField(
+        OutlinedTextField(
           hintText: 'Password',
+          controller: passwordController,
+          obscureText: true,
         ),
         const SizedBox(height: fieldVerticalGap),
-        const OutlinedTextField(
+        OutlinedTextField(
           hintText: 'Confirm password',
+          controller: confirmPasswordController,
+          obscureText: true,
+          validator: (v) {
+            if (v != passwordController?.text) {
+              return 'Passwords do not match';
+            }
+            return null;
+          },
         ),
         const SizedBox(height: fieldVerticalGap),
-        const OutlinedTextField(
+        OutlinedTextField(
           hintText: 'Phone number',
+          controller: phoneNumberController,
         ),
         const SizedBox(height: fieldVerticalGap),
-        const GenderField(),
+        GenderField(
+          value: gender,
+          onChanged: onGenderChanged,
+        ),
         const SizedBox(height: fieldVerticalGap),
         RoundedMultiSelect(
           items: [
