@@ -85,7 +85,7 @@ class _ChefViewPageState extends State<ChefViewPage> {
 
       if (!mounted) return;
 
-      Navigator.of(context).pop();
+      Navigator.of(context).pushReplacementNamed(LoginPage.path);
     } catch (e) {
       stderr.writeln(e);
       ScaffoldMessenger.of(context).showSnackBar(
