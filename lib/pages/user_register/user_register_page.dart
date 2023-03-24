@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:my_recipe/models/user_model.dart';
 import 'package:my_recipe/pages/user_register/widgets/buttons.dart';
 import 'package:my_recipe/pages/user_register/widgets/positioned_profile_pic.dart';
+import 'package:my_recipe/pages/user_view/user_view_page.dart';
 import 'package:my_recipe/repositories/users_repo.dart';
 import 'package:my_recipe/theme.dart';
 import 'package:my_recipe/widgets/user_fields.dart';
@@ -48,7 +49,8 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
     var user = _buildUser();
 
     try {
-      await _usersRepo.createUser(user, _passwordController.text);
+      final newUser =
+          await _usersRepo.createUser(user, _passwordController.text);
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -57,8 +59,9 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
           ),
         );
         Navigator.of(context).pushNamedAndRemoveUntil(
-          '/home',
+          UserViewPage.path,
           (route) => false,
+          arguments: newUser.id,
         );
       }
     } on FirebaseAuthException catch (e) {

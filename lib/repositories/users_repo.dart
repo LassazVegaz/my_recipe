@@ -12,13 +12,16 @@ class UsersRepository {
   UsersRepository._();
   static final UsersRepository instance = UsersRepository._();
 
-  Future<void> createUser(NormalUser user, String password) async {
+  Future<NormalUser> createUser(NormalUser user, String password) async {
     var fUser = await _fa.createUserWithEmailAndPassword(
       email: user.email,
       password: password,
     );
     var map = user.toJson();
     await _ff.collection(_colName).doc(fUser.user!.uid).set(map);
+
+    user.id = fUser.user!.uid;
+    return user;
   }
 
   Future<NormalUser?> getUser(String id) async {
