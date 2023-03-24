@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_recipe/firebase_options.dart';
+import 'package:my_recipe/pages/admin_home/admin_home_page.dart';
 import 'package:my_recipe/pages/chef_register_page.dart';
 import 'package:my_recipe/pages/chef_view/chef_view_page.dart';
 import 'package:my_recipe/pages/chefs_list_page.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'My Recipe',
       theme: themeData,
-      initialRoute: LoginPage.path,
+      initialRoute: AdminHomePage.path,
       routes: {
         SampleScreen.path: (context) => const SampleScreen(),
         ChefRegisterPage.path: (context) => const ChefRegisterPage(),
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         UsersListPage.path: (context) => const UsersListPage(),
         UserViewPage.path: (context) => const UserViewPage(),
         UserHomePage.path: (context) => const UserHomePage(),
+        AdminHomePage.path: (context) => const AdminHomePage(),
       },
     );
   }
