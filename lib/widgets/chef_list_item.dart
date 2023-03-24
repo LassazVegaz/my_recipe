@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_recipe/models/chef_model.dart';
+import 'package:my_recipe/pages/chef_view_page.dart';
 import 'package:my_recipe/theme.dart';
 
 class ChefListItem extends StatelessWidget {
@@ -43,7 +44,10 @@ class ChefListItem extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context)
+                  .pushNamed(ChefViewPage.path, arguments: chef.id);
+            },
             icon: const Icon(Icons.arrow_forward_ios),
           )
         ],
