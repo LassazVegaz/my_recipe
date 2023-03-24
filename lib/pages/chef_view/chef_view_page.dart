@@ -3,11 +3,14 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:my_recipe/models/chef_model.dart';
 import 'package:my_recipe/pages/chef_view/widgets/buttons.dart';
+import 'package:my_recipe/pages/login_page.dart';
+import 'package:my_recipe/repositories/auth_repo.dart';
 import 'package:my_recipe/repositories/chefs_repo.dart';
 import 'package:my_recipe/theme.dart';
 import 'package:my_recipe/widgets/chef_fields.dart';
 
 final _chefsRepo = ChefsRepository.instance;
+final _authRepo = AuthRrepository.instance;
 
 class ChefViewPage extends StatefulWidget {
   static const path = '/chef_view';
@@ -22,6 +25,7 @@ class _ChefViewPageState extends State<ChefViewPage> {
   final _formKey = GlobalKey<FormState>();
   String? _uid;
   String? gender;
+  String? image;
   final _firstNameController = TextEditingController(),
       _lastNameController = TextEditingController(),
       _emailController = TextEditingController(),
@@ -33,7 +37,10 @@ class _ChefViewPageState extends State<ChefViewPage> {
     _lastNameController.text = chef.lastName;
     _emailController.text = chef.email;
     _phoneNumberController.text = chef.phone;
-    setState(() => gender = chef.gender);
+    setState(() {
+      gender = chef.gender;
+      image = chef.image;
+    });
   }
 
   Chef _buildChef() => Chef(
@@ -94,6 +101,19 @@ class _ChefViewPageState extends State<ChefViewPage> {
     _loadChef();
   }
 
+  void _onSignOutPressed() async {
+    try {
+      await _authRepo.signOut();
+
+      if (!mounted) return;
+
+      Navigator.of(context).pushReplacementNamed(LoginPage.path);
+    } catch (e) {
+      stderr.writeln(e);
+      Navigator.of(context).pushReplacementNamed(LoginPage.path);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -113,6 +133,12 @@ class _ChefViewPageState extends State<ChefViewPage> {
           style: Theme.of(context).textTheme.headline5,
         ),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.power_settings_new),
+            onPressed: _onSignOutPressed,
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -132,6 +158,8 @@ class _ChefViewPageState extends State<ChefViewPage> {
                   phoneNumberController: _phoneNumberController,
                   gender: gender,
                   onGenderChanged: (g) => setState(() => gender = g),
+                  image: image,
+                  onImageSelected: (i) => setState(() => image = i),
                 ),
                 const SizedBox(height: 40),
                 Buttons(
