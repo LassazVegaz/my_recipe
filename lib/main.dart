@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'My Recipe',
       theme: themeData,
-      initialRoute: UserViewPage.path,
+      initialRoute: ChefRegisterPage.path,
       routes: {
         SampleScreen.path: (context) => const SampleScreen(),
         ChefRegisterPage.path: (context) => const ChefRegisterPage(),
