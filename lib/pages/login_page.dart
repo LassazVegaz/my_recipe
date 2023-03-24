@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_recipe/enums/role_enum.dart';
+import 'package:my_recipe/pages/admin_home/admin_home_page.dart';
 import 'package:my_recipe/pages/chef_register_page.dart';
 import 'package:my_recipe/pages/chef_view/chef_view_page.dart';
 import 'package:my_recipe/pages/user_home_page.dart';
@@ -39,8 +40,14 @@ class _LoginPageState extends State<LoginPage> {
 
       if (!mounted) return;
 
-      var nextPage =
-          _authRepo.role == Role.chef ? ChefViewPage.path : UserHomePage.path;
+      // remove keyboard focus
+      FocusScope.of(context).unfocus();
+
+      var nextPage = _authRepo.role == Role.chef
+          ? ChefViewPage.path
+          : _authRepo.role == Role.admin
+              ? AdminHomePage.path
+              : UserHomePage.path;
 
       Navigator.of(context)
           .pushReplacementNamed(nextPage, arguments: user!.uid);
