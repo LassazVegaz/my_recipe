@@ -8,9 +8,6 @@ import 'package:my_recipe/repositories/users_repo.dart';
 import 'package:my_recipe/theme.dart';
 import 'package:my_recipe/widgets/user_fields.dart';
 
-// hard coded ID of the user to be displayed
-const _userId = 'O0QuKaTWBUYuoCO1w7Fe08VOMSj2';
-
 // margin top ratio of the fields container with respect to the screen height
 const _marginTopR = 0.47;
 const _fieldsContainerHeightR = 0.48; // with respect to the screen height
@@ -103,8 +100,10 @@ class _UserViewPageState extends State<UserViewPage> {
   void initState() {
     super.initState();
 
-    uid = _userId;
-    _fetchUser();
+    Future.delayed(Duration.zero, () {
+      uid = ModalRoute.of(context)!.settings.arguments as String;
+      _fetchUser();
+    });
   }
 
   @override
