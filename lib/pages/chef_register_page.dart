@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_recipe/models/chef_model.dart';
+import 'package:my_recipe/pages/chef_view/chef_view_page.dart';
 import 'package:my_recipe/pages/chefs_list_page.dart';
 import 'package:my_recipe/repositories/chefs_repo.dart';
 import 'package:my_recipe/theme.dart';
@@ -43,13 +44,18 @@ class _ChefRegisterPageState extends State<ChefRegisterPage> {
     var chef = _buildChef();
 
     try {
-      await _chefsRepo.createChef(chef, _passwordController.text);
+      var newChef = await _chefsRepo.createChef(chef, _passwordController.text);
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Account created successfully'),
           ),
+        );
+        Navigator.of(context).pushNamedAndRemoveUntil(
+          ChefViewPage.path,
+          (route) => false,
+          arguments: newChef.id,
         );
       }
     } on FirebaseAuthException catch (e) {

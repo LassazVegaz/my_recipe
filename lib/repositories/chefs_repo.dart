@@ -13,13 +13,16 @@ class ChefsRepository {
   ChefsRepository._();
   static final ChefsRepository instance = ChefsRepository._();
 
-  Future<void> createChef(Chef chef, String password) async {
+  Future<Chef> createChef(Chef chef, String password) async {
     var fUser = await _fa.createUserWithEmailAndPassword(
       email: chef.email,
       password: password,
     );
     var map = chef.toJson();
     await _ff.collection(_colName).doc(fUser.user!.uid).set(map);
+
+    chef.id = fUser.user!.uid;
+    return chef;
   }
 
   Future<Chef?> getChef(String id) async {
