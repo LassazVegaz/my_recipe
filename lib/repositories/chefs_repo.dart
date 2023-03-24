@@ -50,4 +50,16 @@ class ChefsRepository {
     }).toList();
     return chefs;
   }
+
+  Stream<List<Chef>> listenToChefs() async* {
+    var docs = _ff.collection(_colName).snapshots();
+    await for (var doc in docs) {
+      var chefs = doc.docs.map((e) {
+        var chef = Chef.fromJson(e.data());
+        chef.id = e.id;
+        return chef;
+      }).toList();
+      yield chefs;
+    }
+  }
 }

@@ -26,7 +26,7 @@ class Chef {
         phone: json["phone"],
         image: json["image"],
         gender: json["gender"],
-        foodTypes: json["foodTypes"],
+        foodTypes: List<String>.from(json["foodTypes"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
