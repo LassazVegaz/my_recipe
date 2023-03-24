@@ -19,7 +19,7 @@ class ProfilePicture extends StatelessWidget {
     Image img;
     if (image == null) {
       img = Image.asset(_assetImage);
-    } else if (image!.startsWith('assets')) {
+    } else if (image!.startsWith('http')) {
       img = Image.network(image!);
     } else {
       img = Image.file(File(image!));

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:my_recipe/models/user_model.dart';
 import 'package:my_recipe/pages/login_page.dart';
 import 'package:my_recipe/pages/user_view/widgets/form_buttons.dart';
@@ -102,6 +103,27 @@ class _UserViewPageState extends State<UserViewPage> {
     }
   }
 
+  void _onEditProPicPressed() async {
+    var xfile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (xfile == null) return;
+
+    try {
+      final url = await _usersRepo.uploadProfilePicture(uid, xfile.path);
+
+      if (!mounted) return;
+      setState(() => _image = url);
+    } catch (e) {
+      stderr.writeln(e);
+
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Failed to upload image. Please try again.'),
+        ),
+      );
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -194,7 +216,15 @@ class _UserViewPageState extends State<UserViewPage> {
                 ),
               ],
             ),
-          )
+          ),
+          Positioned(
+            top: 30,
+            right: 5,
+            child: IconButton(
+              onPressed: _onEditProPicPressed,
+              icon: const Icon(Icons.edit),
+            ),
+          ),
         ],
       ),
     );
