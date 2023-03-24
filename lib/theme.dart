@@ -22,6 +22,7 @@ const listItemBorderRadius = fieldBorderRadius;
 const pagePaddingHorizental = 30.0;
 
 const formButtonWidth = 90.0;
+const _buttonPadding = EdgeInsets.symmetric(vertical: 12, horizontal: 16);
 
 var themeData = ThemeData(
   colorScheme: ColorScheme.fromSwatch(
@@ -64,7 +65,7 @@ var themeData = ThemeData(
         color: Colors.white,
       ),
       shape: _buttonBorderShape,
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+      padding: _buttonPadding,
     ),
   ),
   outlinedButtonTheme: OutlinedButtonThemeData(
@@ -79,7 +80,16 @@ var themeData = ThemeData(
         color: primaryColor,
         width: 1,
       ),
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+      padding: _buttonPadding,
+    ),
+  ),
+  inputDecorationTheme: const InputDecorationTheme(
+    border: OutlineInputBorder(
+      borderRadius: fieldBorderRadius,
+    ),
+    contentPadding: EdgeInsets.symmetric(
+      vertical: 4,
+      horizontal: 16,
     ),
   ),
 );

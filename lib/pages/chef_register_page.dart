@@ -11,8 +11,9 @@ class ChefRegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Register as a Chef',
+          style: Theme.of(context).textTheme.headline5,
         ),
         centerTitle: true,
       ),
@@ -33,14 +34,18 @@ class ChefRegisterPage extends StatelessWidget {
               const SizedBox(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text('Already have an account?'),
-                  SizedBox(width: 8),
-                  Text(
-                    'Login',
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.w700,
+                children: [
+                  const Text('Already have an account?'),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text(
+                      'Login',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
                 ],

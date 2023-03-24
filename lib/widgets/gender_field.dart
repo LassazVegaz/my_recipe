@@ -2,11 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:my_recipe/widgets/rounded_dropdown.dart';
 
 class GenderField extends StatelessWidget {
-  const GenderField({Key? key}) : super(key: key);
+  final void Function(String?)? onChanged;
+  final String? value;
+
+  const GenderField({
+    Key? key,
+    this.onChanged,
+    this.value,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return RoundedDropdown<String>(
+      value: value,
       items: const [
         DropdownMenuItem(
           value: null,
@@ -21,7 +29,13 @@ class GenderField extends StatelessWidget {
           child: Text('Female'),
         ),
       ],
-      onChanged: (value) {},
+      onChanged: onChanged,
+      validator: (v) {
+        if (v == null || v.isEmpty) {
+          return "Please select a value";
+        }
+        return null;
+      },
     );
   }
 }
