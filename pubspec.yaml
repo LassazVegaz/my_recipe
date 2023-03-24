@@ -39,6 +39,7 @@ dependencies:
   firebase_storage: ^11.0.16
   multi_select_flutter: ^4.1.3
   accordion: ^2.5.1
+  image_picker: ^0.8.7
 
 dev_dependencies:
   flutter_test:
