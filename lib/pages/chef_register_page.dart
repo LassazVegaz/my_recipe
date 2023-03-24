@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_recipe/models/chef_model.dart';
 import 'package:my_recipe/pages/chef_view/chef_view_page.dart';
-import 'package:my_recipe/pages/chefs_list_page.dart';
 import 'package:my_recipe/repositories/chefs_repo.dart';
 import 'package:my_recipe/theme.dart';
 import 'package:my_recipe/widgets/chef_fields.dart';

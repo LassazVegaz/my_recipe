@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_recipe/models/chef_model.dart';
-import 'package:my_recipe/models/user_model.dart';
 
 final _fa = FirebaseAuth.instance;
 final _ff = FirebaseFirestore.instance;
