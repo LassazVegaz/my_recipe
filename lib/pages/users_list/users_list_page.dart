@@ -2,6 +2,7 @@ import 'package:accordion/accordion.dart';
 import 'package:accordion/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:my_recipe/models/user_model.dart';
+import 'package:my_recipe/pages/user_view/user_view_page.dart';
 import 'package:my_recipe/pages/users_list/widgets/data_row.dart';
 import 'package:my_recipe/repositories/users_repo.dart';
 import 'package:my_recipe/theme.dart';
@@ -40,13 +41,26 @@ class _UsersListPageState extends State<UsersListPage> {
       ),
       content: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            UserDataRow(label: "Email", value: user.email),
-            const SizedBox(height: 8),
-            UserDataRow(label: "Phone", value: user.phone),
-            const SizedBox(height: 8),
-            UserDataRow(label: "Address", value: user.address),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                UserDataRow(label: "Email", value: user.email),
+                const SizedBox(height: 8),
+                UserDataRow(label: "Phone", value: user.phone),
+                const SizedBox(height: 8),
+                UserDataRow(label: "Address", value: user.address),
+              ],
+            ),
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, UserViewPage.path,
+                    arguments: user.id);
+              },
+              icon: const Icon(Icons.edit),
+            )
           ],
         ),
       ),
