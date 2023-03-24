@@ -34,6 +34,7 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
       _addressController = TextEditingController();
 
   String? gender;
+  String? _image;
 
   NormalUser _buildUser() => NormalUser(
         name: _nameController.text,
@@ -41,6 +42,7 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
         phone: _phoneNumberController.text,
         address: _addressController.text,
         gender: gender!,
+        image: _image,
       );
 
   void _onSignUpClick(BuildContext context) async {
@@ -137,9 +139,11 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
                 ],
               ),
             ),
-            const PositionedProfilePic(
+            PositionedProfilePic(
               top: _avatarMarginTop,
               radius: _avatarRadius,
+              image: _image,
+              onImageSelected: (path) => setState(() => _image = path),
             ),
           ],
         ),

@@ -2,28 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:my_recipe/theme.dart';
 import 'package:my_recipe/widgets/image_selector.dart';
 
-class PositionedProfilePic extends StatefulWidget {
+class PositionedProfilePic extends StatelessWidget {
+  final void Function(String)? onImageSelected;
+
   final double top;
   final double radius;
+  final String? image;
 
   const PositionedProfilePic({
     Key? key,
     required this.top,
     required this.radius,
+    this.onImageSelected,
+    this.image,
   }) : super(key: key);
-
-  @override
-  State<PositionedProfilePic> createState() => _PositionedProfilePicState();
-}
-
-class _PositionedProfilePicState extends State<PositionedProfilePic> {
-  String? file;
 
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: widget.top,
-      left: MediaQuery.of(context).size.width / 2 - widget.radius,
+      top: top,
+      left: MediaQuery.of(context).size.width / 2 - radius,
       child: Container(
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
@@ -39,11 +37,11 @@ class _PositionedProfilePicState extends State<PositionedProfilePic> {
         ),
         child: ImageSelector(
           defaultAssetImage: "assets/user.png",
-          image: file,
-          onImageSelected: (path) => setState(() => file = path),
+          image: image,
+          onImageSelected: onImageSelected,
           builder: (image) => ClipOval(
             child: CircleAvatar(
-              radius: widget.radius,
+              radius: radius,
               backgroundColor: Colors.white,
               backgroundImage: image,
             ),
