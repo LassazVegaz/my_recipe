@@ -15,6 +15,7 @@ class ChefFields extends StatelessWidget {
       confirmPasswordController,
       phoneNumberController;
   final String? gender;
+  final bool isEditing;
 
   const ChefFields({
     Key? key,
@@ -26,6 +27,7 @@ class ChefFields extends StatelessWidget {
     this.phoneNumberController,
     this.onGenderChanged,
     this.gender,
+    this.isEditing = false,
   }) : super(key: key);
 
   @override
@@ -45,7 +47,7 @@ class ChefFields extends StatelessWidget {
                 controller: firstNameController,
               ),
             ),
-            SizedBox(width: 32),
+            const SizedBox(width: 32),
             Expanded(
               child: OutlinedTextField(
                 hintText: 'Last name',
@@ -60,24 +62,30 @@ class ChefFields extends StatelessWidget {
           controller: emailController,
         ),
         const SizedBox(height: fieldVerticalGap),
-        OutlinedTextField(
-          hintText: 'Password',
-          controller: passwordController,
-          obscureText: true,
-        ),
-        const SizedBox(height: fieldVerticalGap),
-        OutlinedTextField(
-          hintText: 'Confirm password',
-          controller: confirmPasswordController,
-          obscureText: true,
-          validator: (v) {
-            if (v != passwordController?.text) {
-              return 'Passwords do not match';
-            }
-            return null;
-          },
-        ),
-        const SizedBox(height: fieldVerticalGap),
+        isEditing
+            ? Container()
+            : Column(
+                children: [
+                  OutlinedTextField(
+                    hintText: 'Password',
+                    controller: passwordController,
+                    obscureText: true,
+                  ),
+                  const SizedBox(height: fieldVerticalGap),
+                  OutlinedTextField(
+                    hintText: 'Confirm password',
+                    controller: confirmPasswordController,
+                    obscureText: true,
+                    validator: (v) {
+                      if (v != passwordController?.text) {
+                        return 'Passwords do not match';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: fieldVerticalGap),
+                ],
+              ),
         OutlinedTextField(
           hintText: 'Phone number',
           controller: phoneNumberController,
