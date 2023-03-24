@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:my_recipe/models/chef_model.dart';
 import 'package:my_recipe/pages/chef_view/widgets/buttons.dart';
@@ -17,12 +19,13 @@ class ChefViewPage extends StatefulWidget {
 }
 
 class _ChefViewPageState extends State<ChefViewPage> {
+  final _formKey = GlobalKey<FormState>();
   String? _uid;
+  String? gender;
   final _firstNameController = TextEditingController(),
       _lastNameController = TextEditingController(),
       _emailController = TextEditingController(),
       _phoneNumberController = TextEditingController();
-  String? gender;
 
   void _loadChef() async {
     final chef = await _chefsRepo.getChef(_uid!);
@@ -31,6 +34,42 @@ class _ChefViewPageState extends State<ChefViewPage> {
     _emailController.text = chef.email;
     _phoneNumberController.text = chef.phone;
     setState(() => gender = chef.gender);
+  }
+
+  Chef _buildChef() => Chef(
+        firstName: _firstNameController.text,
+        lastName: _lastNameController.text,
+        email: _emailController.text,
+        phone: _phoneNumberController.text,
+        gender: gender!,
+        foodTypes: [],
+        id: _uid,
+      );
+
+  void _onUppdatePressed() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    final chef = _buildChef();
+
+    try {
+      await _chefsRepo.updateChef(chef);
+
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Account updated successfully.'),
+        ),
+      );
+      setState(() {});
+    } catch (e) {
+      stderr.writeln(e);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Failed to update account. Please try again.'),
+        ),
+      );
+    }
   }
 
   @override
@@ -58,22 +97,27 @@ class _ChefViewPageState extends State<ChefViewPage> {
           padding: const EdgeInsets.symmetric(
             horizontal: pagePaddingHorizental,
           ),
-          child: Column(
-            children: [
-              const SizedBox(height: 30),
-              ChefFields(
-                isEditing: true,
-                firstNameController: _firstNameController,
-                lastNameController: _lastNameController,
-                emailController: _emailController,
-                phoneNumberController: _phoneNumberController,
-                gender: gender,
-                onGenderChanged: (g) => setState(() => gender = g),
-              ),
-              const SizedBox(height: 40),
-              const Buttons(),
-              const SizedBox(height: 30),
-            ],
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                const SizedBox(height: 30),
+                ChefFields(
+                  isEditing: true,
+                  firstNameController: _firstNameController,
+                  lastNameController: _lastNameController,
+                  emailController: _emailController,
+                  phoneNumberController: _phoneNumberController,
+                  gender: gender,
+                  onGenderChanged: (g) => setState(() => gender = g),
+                ),
+                const SizedBox(height: 40),
+                Buttons(
+                  onUpdatePressed: _onUppdatePressed,
+                ),
+                const SizedBox(height: 30),
+              ],
+            ),
           ),
         ),
       ),

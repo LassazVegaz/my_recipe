@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:my_recipe/theme.dart';
 
 class Buttons extends StatelessWidget {
+  final VoidCallback? onResetPressed;
+  final VoidCallback? onUpdatePressed;
+  final VoidCallback? onDeletePressed;
+
   const Buttons({
     Key? key,
+    this.onResetPressed,
+    this.onUpdatePressed,
+    this.onDeletePressed,
   }) : super(key: key);
 
   @override
@@ -14,21 +21,21 @@ class Buttons extends StatelessWidget {
         SizedBox(
           width: formButtonWidth,
           child: OutlinedButton(
-            onPressed: () {},
+            onPressed: onResetPressed,
             child: const Text('Reset'),
           ),
         ),
         SizedBox(
           width: formButtonWidth,
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: onUpdatePressed,
             child: const Text('Update'),
           ),
         ),
         SizedBox(
           width: formButtonWidth,
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: onDeletePressed,
             style: ElevatedButton.styleFrom(
               primary: Theme.of(context).colorScheme.secondary,
             ),
