@@ -35,6 +35,7 @@ class _UserViewPageState extends State<UserViewPage> {
       addressController = TextEditingController(),
       phoneNumberController = TextEditingController();
   String? gender;
+  String? _image;
   String uid = '';
 
   void _fetchUser() async {
@@ -44,7 +45,10 @@ class _UserViewPageState extends State<UserViewPage> {
     emailController.text = user.email;
     addressController.text = user.address;
     phoneNumberController.text = user.phone;
-    setState(() => gender = user.gender);
+    setState(() {
+      gender = user.gender;
+      _image = user.image;
+    });
   }
 
   NormalUser _buildUser() => NormalUser(
@@ -134,6 +138,7 @@ class _UserViewPageState extends State<UserViewPage> {
               children: [
                 ProfilePicture(
                   height: imageHeight,
+                  image: _image,
                 ),
                 SizedBox(
                   height: boxBelowImageHeight,

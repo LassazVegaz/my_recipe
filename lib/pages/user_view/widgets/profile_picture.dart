@@ -1,15 +1,30 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+
+const _assetImage = "assets/user.png";
 
 class ProfilePicture extends StatelessWidget {
   final double height;
+  final String? image;
 
   const ProfilePicture({
     Key? key,
     required this.height,
+    this.image,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Image img;
+    if (image == null) {
+      img = Image.asset(_assetImage);
+    } else if (image!.startsWith('assets')) {
+      img = Image.network(image!);
+    } else {
+      img = Image.file(File(image!));
+    }
+
     return ShaderMask(
       shaderCallback: (rect) {
         return const LinearGradient(
@@ -30,12 +45,14 @@ class ProfilePicture extends StatelessWidget {
         );
       },
       blendMode: BlendMode.dstIn,
-      child: Image.asset(
-        "assets/temp_1.jpg",
+      child: Container(
         height: height,
-        width: double.infinity,
-        fit: BoxFit.fitWidth,
-        alignment: Alignment.topCenter,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: img.image,
+            fit: BoxFit.cover,
+          ),
+        ),
       ),
     );
   }
