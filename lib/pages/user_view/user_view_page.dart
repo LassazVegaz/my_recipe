@@ -69,7 +69,7 @@ class _UserViewPageState extends State<UserViewPage> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('User updated successfully.'),
+          content: Text('Account updated successfully.'),
         ),
       );
     } catch (e) {
