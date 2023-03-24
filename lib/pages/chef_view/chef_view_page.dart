@@ -72,6 +72,28 @@ class _ChefViewPageState extends State<ChefViewPage> {
     }
   }
 
+  void _onDeletePressed() async {
+    try {
+      await _chefsRepo.deleteChef(_uid!);
+
+      if (!mounted) return;
+
+      Navigator.of(context).pop();
+    } catch (e) {
+      stderr.writeln(e);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Failed to delete account. Please try again.'),
+        ),
+      );
+    }
+  }
+
+  void _onResetPressed() {
+    _formKey.currentState!.reset();
+    _loadChef();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -114,6 +136,8 @@ class _ChefViewPageState extends State<ChefViewPage> {
                 const SizedBox(height: 40),
                 Buttons(
                   onUpdatePressed: _onUppdatePressed,
+                  onDeletePressed: _onDeletePressed,
+                  onResetPressed: _onResetPressed,
                 ),
                 const SizedBox(height: 30),
               ],
