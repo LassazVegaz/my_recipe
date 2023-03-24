@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:my_recipe/models/user_model.dart';
+import 'package:my_recipe/pages/login_page.dart';
 import 'package:my_recipe/pages/user_view/widgets/form_buttons.dart';
 import 'package:my_recipe/pages/user_view/widgets/profile_picture.dart';
 import 'package:my_recipe/repositories/users_repo.dart';
@@ -85,7 +86,8 @@ class _UserViewPageState extends State<UserViewPage> {
           content: Text('Account deleted successfully.'),
         ),
       );
-      Navigator.of(context).pop();
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(LoginPage.path, (route) => false);
     } catch (e) {
       stderr.writeln(e);
       ScaffoldMessenger.of(context).showSnackBar(
