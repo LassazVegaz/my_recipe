@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_recipe/models/user_model.dart';
+import 'package:my_recipe/repositories/auth_repo.dart';
 
 final _fa = FirebaseAuth.instance;
 final _ff = FirebaseFirestore.instance;
+final _authRepo = AuthRrepository.instance;
 
 const _colName = 'users';
 
@@ -17,8 +19,11 @@ class UsersRepository {
       email: user.email,
       password: password,
     );
+
     var map = user.toJson();
     await _ff.collection(_colName).doc(fUser.user!.uid).set(map);
+
+    await _authRepo.setRole();
 
     user.id = fUser.user!.uid;
     return user;
