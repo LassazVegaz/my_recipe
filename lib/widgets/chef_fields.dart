@@ -2,6 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:my_recipe/theme.dart';
+import 'package:my_recipe/utils/validators.dart';
 import 'package:my_recipe/widgets/gender_field.dart';
 import 'package:my_recipe/widgets/image_selector.dart';
 import 'package:my_recipe/widgets/outlined_textfield.dart';
@@ -109,6 +110,12 @@ class ChefFields extends StatelessWidget {
         OutlinedTextField(
           hintText: 'Phone number',
           controller: phoneNumberController,
+          validator: (value) {
+            if (!validatePhoneNumber(value!)) {
+              return 'Phone number is invalid';
+            }
+            return null;
+          },
         ),
         const SizedBox(height: fieldVerticalGap),
         GenderField(
