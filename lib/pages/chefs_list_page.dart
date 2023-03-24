@@ -32,12 +32,12 @@ class _ChefsListPageState extends State<ChefsListPage> {
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 final chef = snapshot.data![index];
-                return const Padding(
-                  padding: EdgeInsets.symmetric(
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: pagePaddingHorizental,
                     vertical: 8,
                   ),
-                  child: ChefListItem(),
+                  child: ChefListItem(chef: chef),
                 );
               },
             );
