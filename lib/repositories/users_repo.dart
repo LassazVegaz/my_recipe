@@ -77,4 +77,16 @@ class UsersRepository {
 
     return url;
   }
+
+  Stream<List<NormalUser>> listenToUsers() async* {
+    var docs = _ff.collection(_colName).snapshots();
+    await for (var doc in docs) {
+      var users = doc.docs.map((e) {
+        var user = NormalUser.fromJson(e.data());
+        user.id = e.id;
+        return user;
+      }).toList();
+      yield users;
+    }
+  }
 }

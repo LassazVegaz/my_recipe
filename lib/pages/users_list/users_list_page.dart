@@ -18,9 +18,11 @@ class UsersListPage extends StatefulWidget {
 }
 
 class _UsersListPageState extends State<UsersListPage> {
-  List<NormalUser> users = [];
+  var users = _usersRepo.listenToUsers();
 
   AccordionSection _buildAccordion(BuildContext context, NormalUser user) {
+    var gender = user.gender[0].toUpperCase() + user.gender.substring(1);
+
     return AccordionSection(
       header: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,7 +33,7 @@ class _UsersListPageState extends State<UsersListPage> {
           ),
           const SizedBox(height: 8),
           Text(
-            '26 Years',
+            gender,
             style: Theme.of(context).textTheme.headline3,
           ),
         ],
@@ -52,36 +54,42 @@ class _UsersListPageState extends State<UsersListPage> {
   }
 
   @override
-  void initState() {
-    super.initState();
-
-    _usersRepo.getAllUsers().then((v) => setState(() => users = v));
-  }
-
-  @override
   build(context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Users List'),
       ),
-      body: Accordion(
-        maxOpenSections: 1,
-        scaleWhenAnimating: true,
-        openAndCloseAnimation: true,
-        headerBackgroundColor: listItemBackground,
-        contentBackgroundColor: listItemBackground,
-        contentBorderColor: const Color.fromARGB(255, 212, 212, 212),
-        contentBorderWidth: 2,
-        headerPadding: const EdgeInsets.symmetric(vertical: 11, horizontal: 25),
-        contentHorizontalPadding: 50,
-        contentVerticalPadding: 20,
-        paddingBetweenClosedSections: 20,
-        paddingBetweenOpenSections: 20,
-        sectionOpeningHapticFeedback: SectionHapticFeedback.heavy,
-        sectionClosingHapticFeedback: SectionHapticFeedback.light,
-        rightIcon: const Icon(Icons.keyboard_arrow_down),
-        children: users.map((u) => _buildAccordion(context, u)).toList(),
-      ),
+      body: StreamBuilder<List<NormalUser>>(
+          stream: users,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Accordion(
+                maxOpenSections: 1,
+                scaleWhenAnimating: true,
+                openAndCloseAnimation: true,
+                headerBackgroundColor: listItemBackground,
+                contentBackgroundColor: listItemBackground,
+                contentBorderColor: const Color.fromARGB(255, 212, 212, 212),
+                contentBorderWidth: 2,
+                headerPadding:
+                    const EdgeInsets.symmetric(vertical: 11, horizontal: 25),
+                contentHorizontalPadding: 50,
+                contentVerticalPadding: 20,
+                paddingBetweenClosedSections: 20,
+                paddingBetweenOpenSections: 20,
+                sectionOpeningHapticFeedback: SectionHapticFeedback.heavy,
+                sectionClosingHapticFeedback: SectionHapticFeedback.light,
+                rightIcon: const Icon(Icons.keyboard_arrow_down),
+                children: snapshot.data!
+                    .map((u) => _buildAccordion(context, u))
+                    .toList(),
+              );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          }),
     );
   }
 }
