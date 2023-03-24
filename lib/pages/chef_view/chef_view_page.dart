@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:my_recipe/enums/role_enum.dart';
 import 'package:my_recipe/models/chef_model.dart';
 import 'package:my_recipe/pages/chef_view/widgets/buttons.dart';
 import 'package:my_recipe/pages/login_page.dart';
@@ -162,11 +163,13 @@ class _ChefViewPageState extends State<ChefViewPage> {
                   onImageSelected: (i) => setState(() => image = i),
                 ),
                 const SizedBox(height: 40),
-                Buttons(
-                  onUpdatePressed: _onUppdatePressed,
-                  onDeletePressed: _onDeletePressed,
-                  onResetPressed: _onResetPressed,
-                ),
+                _authRepo.role != Role.user
+                    ? Buttons(
+                        onUpdatePressed: _onUppdatePressed,
+                        onDeletePressed: _onDeletePressed,
+                        onResetPressed: _onResetPressed,
+                      )
+                    : const SizedBox.shrink(),
                 const SizedBox(height: 30),
               ],
             ),
