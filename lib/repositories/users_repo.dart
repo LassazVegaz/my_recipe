@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:my_recipe/models/user_model.dart';
 import 'package:my_recipe/repositories/auth_repo.dart';
 
 final _fa = FirebaseAuth.instance;
 final _ff = FirebaseFirestore.instance;
+final _fs = FirebaseStorage.instance;
 final _authRepo = AuthRrepository.instance;
 
 const _colName = 'users';
@@ -23,9 +27,11 @@ class UsersRepository {
     var map = user.toJson();
     await _ff.collection(_colName).doc(fUser.user!.uid).set(map);
 
+    user.id = fUser.user!.uid;
+    user.image = await uploadProfilePicture(user.id!, user.image!);
+
     await _authRepo.setRole();
 
-    user.id = fUser.user!.uid;
     return user;
   }
 
@@ -56,5 +62,31 @@ class UsersRepository {
       return user;
     }).toList();
     return users;
+  }
+
+  // upload profile image
+  Future<String> uploadProfilePicture(String uid, String imgFile) async {
+    var file = File(imgFile);
+    var fileExt = file.path.split('.').last;
+
+    var ref = _fs.ref().child('profile_pictures/$uid.$fileExt');
+    await ref.putFile(file);
+
+    var url = await ref.getDownloadURL();
+    await _ff.collection(_colName).doc(uid).update({'image': url});
+
+    return url;
+  }
+
+  Stream<List<NormalUser>> listenToUsers() async* {
+    var docs = _ff.collection(_colName).snapshots();
+    await for (var doc in docs) {
+      var users = doc.docs.map((e) {
+        var user = NormalUser.fromJson(e.data());
+        user.id = e.id;
+        return user;
+      }).toList();
+      yield users;
+    }
   }
 }

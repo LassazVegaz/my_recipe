@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:my_recipe/theme.dart';
+import 'package:my_recipe/widgets/image_selector.dart';
 
 class PositionedProfilePic extends StatelessWidget {
+  final void Function(String)? onImageSelected;
+
   final double top;
   final double radius;
+  final String? image;
 
   const PositionedProfilePic({
     Key? key,
     required this.top,
     required this.radius,
+    this.onImageSelected,
+    this.image,
   }) : super(key: key);
 
   @override
@@ -29,9 +35,17 @@ class PositionedProfilePic extends StatelessWidget {
             ),
           ],
         ),
-        child: CircleAvatar(
-          radius: radius,
-          backgroundImage: const AssetImage('assets/user.png'),
+        child: ImageSelector(
+          defaultAssetImage: "assets/user.png",
+          image: image,
+          onImageSelected: onImageSelected,
+          builder: (image) => ClipOval(
+            child: CircleAvatar(
+              radius: radius,
+              backgroundColor: Colors.white,
+              backgroundImage: image,
+            ),
+          ),
         ),
       ),
     );

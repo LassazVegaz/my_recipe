@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:my_recipe/models/user_model.dart';
+import 'package:my_recipe/pages/login_page.dart';
 import 'package:my_recipe/pages/user_view/widgets/form_buttons.dart';
 import 'package:my_recipe/pages/user_view/widgets/profile_picture.dart';
 import 'package:my_recipe/repositories/users_repo.dart';
@@ -34,6 +36,7 @@ class _UserViewPageState extends State<UserViewPage> {
       addressController = TextEditingController(),
       phoneNumberController = TextEditingController();
   String? gender;
+  String? _image;
   String uid = '';
 
   void _fetchUser() async {
@@ -43,7 +46,10 @@ class _UserViewPageState extends State<UserViewPage> {
     emailController.text = user.email;
     addressController.text = user.address;
     phoneNumberController.text = user.phone;
-    setState(() => gender = user.gender);
+    setState(() {
+      gender = user.gender;
+      _image = user.image;
+    });
   }
 
   NormalUser _buildUser() => NormalUser(
@@ -63,7 +69,7 @@ class _UserViewPageState extends State<UserViewPage> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('User updated successfully.'),
+          content: Text('Account updated successfully.'),
         ),
       );
     } catch (e) {
@@ -85,12 +91,34 @@ class _UserViewPageState extends State<UserViewPage> {
           content: Text('Account deleted successfully.'),
         ),
       );
-      Navigator.of(context).pop();
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(LoginPage.path, (route) => false);
     } catch (e) {
       stderr.writeln(e);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Failed to delete account. Please try again.'),
+        ),
+      );
+    }
+  }
+
+  void _onEditProPicPressed() async {
+    var xfile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (xfile == null) return;
+
+    try {
+      final url = await _usersRepo.uploadProfilePicture(uid, xfile.path);
+
+      if (!mounted) return;
+      setState(() => _image = url);
+    } catch (e) {
+      stderr.writeln(e);
+
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Failed to upload image. Please try again.'),
         ),
       );
     }
@@ -132,6 +160,7 @@ class _UserViewPageState extends State<UserViewPage> {
               children: [
                 ProfilePicture(
                   height: imageHeight,
+                  image: _image,
                 ),
                 SizedBox(
                   height: boxBelowImageHeight,
@@ -187,7 +216,15 @@ class _UserViewPageState extends State<UserViewPage> {
                 ),
               ],
             ),
-          )
+          ),
+          Positioned(
+            top: 30,
+            right: 5,
+            child: IconButton(
+              onPressed: _onEditProPicPressed,
+              icon: const Icon(Icons.edit),
+            ),
+          ),
         ],
       ),
     );

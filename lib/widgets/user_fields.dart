@@ -1,5 +1,7 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:my_recipe/theme.dart';
+import 'package:my_recipe/utils/validators.dart';
 import 'package:my_recipe/widgets/gender_field.dart';
 import 'package:my_recipe/widgets/outlined_textfield.dart';
 
@@ -41,6 +43,15 @@ class UserFields extends StatelessWidget {
           hintText: 'Email',
           controller: emailController,
           readOnly: isEditing,
+          validator: (value) {
+            if (isEditing) return null;
+
+            if (!EmailValidator.validate(value!)) {
+              return 'Email is invalid';
+            }
+
+            return null;
+          },
         ),
         const SizedBox(height: fieldVerticalGap),
         !isEditing
@@ -70,6 +81,12 @@ class UserFields extends StatelessWidget {
         OutlinedTextField(
           hintText: 'Phone number',
           controller: phoneNumberController,
+          validator: (value) {
+            if (!validatePhoneNumber(value!)) {
+              return 'Phone number is invalid';
+            }
+            return null;
+          },
         ),
         const SizedBox(height: fieldVerticalGap),
         OutlinedTextField(
