@@ -1,8 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:my_recipe/theme.dart';
+import 'package:my_recipe/widgets/image_selector.dart';
 
 class PositionedProfilePic extends StatefulWidget {
   final double top;
@@ -39,23 +37,16 @@ class _PositionedProfilePicState extends State<PositionedProfilePic> {
             ),
           ],
         ),
-        child: GestureDetector(
-          onTap: () async {
-            final pickedFile = await ImagePicker().pickImage(
-              source: ImageSource.gallery,
-            );
-            if (pickedFile != null) {
-              setState(() {
-                file = pickedFile.path;
-              });
-            }
-          },
-          child: CircleAvatar(
-            radius: widget.radius,
-            backgroundColor: Colors.white,
-            backgroundImage: file != null
-                ? Image.file(File(file!)).image
-                : Image.asset("assets/user.png").image,
+        child: ImageSelector(
+          defaultAssetImage: "assets/user.png",
+          image: file,
+          onImageSelected: (path) => setState(() => file = path),
+          builder: (image) => ClipOval(
+            child: CircleAvatar(
+              radius: widget.radius,
+              backgroundColor: Colors.white,
+              backgroundImage: image,
+            ),
           ),
         ),
       ),
