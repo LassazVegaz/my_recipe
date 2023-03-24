@@ -5,11 +5,16 @@ const _buttonPadding = EdgeInsets.symmetric(
 );
 
 class FormButtons extends StatelessWidget {
+  final VoidCallback? onUpdatePressed;
+  final VoidCallback? onDeletePressed;
+
   final double buttonRadius;
 
   const FormButtons({
     Key? key,
     required this.buttonRadius,
+    this.onUpdatePressed,
+    this.onDeletePressed,
   }) : super(key: key);
 
   @override
@@ -18,7 +23,7 @@ class FormButtons extends StatelessWidget {
       children: [
         Expanded(
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: onUpdatePressed,
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
@@ -32,7 +37,7 @@ class FormButtons extends StatelessWidget {
         ),
         Expanded(
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: onDeletePressed,
             style: ElevatedButton.styleFrom(
               primary: Theme.of(context).colorScheme.secondary,
               shape: RoundedRectangleBorder(

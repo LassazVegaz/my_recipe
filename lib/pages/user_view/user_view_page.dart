@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:my_recipe/models/user_model.dart';
 import 'package:my_recipe/pages/user_view/widgets/form_buttons.dart';
 import 'package:my_recipe/pages/user_view/widgets/profile_picture.dart';
 import 'package:my_recipe/repositories/users_repo.dart';
@@ -44,6 +47,36 @@ class _UserViewPageState extends State<UserViewPage> {
     addressController.text = user.address;
     phoneNumberController.text = user.phone;
     setState(() => gender = user.gender);
+  }
+
+  NormalUser _buildUser() => NormalUser(
+        name: nameController.text,
+        email: emailController.text,
+        address: addressController.text,
+        gender: gender!,
+        phone: phoneNumberController.text,
+        id: uid,
+      );
+
+  void _onUpdatePressed() async {
+    final user = _buildUser();
+
+    try {
+      await _usersRepo.updateUser(user);
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('User updated successfully.'),
+        ),
+      );
+    } catch (e) {
+      stderr.writeln(e);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Failed to update user. Please try again.'),
+        ),
+      );
+    }
   }
 
   @override
@@ -124,8 +157,9 @@ class _UserViewPageState extends State<UserViewPage> {
                             ),
                           ),
                         ),
-                        const FormButtons(
+                        FormButtons(
                           buttonRadius: _fieldsContainerBorderRadius,
+                          onUpdatePressed: _onUpdatePressed,
                         ),
                       ],
                     ),
