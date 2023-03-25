@@ -134,12 +134,14 @@ class _ChefViewPageState extends State<ChefViewPage> {
           style: Theme.of(context).textTheme.headline5,
         ),
         centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.power_settings_new),
-            onPressed: _onSignOutPressed,
-          ),
-        ],
+        actions: _authRepo.role == Role.chef
+            ? [
+                IconButton(
+                  icon: const Icon(Icons.power_settings_new),
+                  onPressed: _onSignOutPressed,
+                ),
+              ]
+            : [],
       ),
       body: SingleChildScrollView(
         child: Padding(
