@@ -174,12 +174,12 @@ class _RecipeListPageState extends State<RecipeListPage> {
                             ),
                           ],
                         ),
-                        trailing: Image.network(
-                          doc['imageUrl'],
-                          height: 100,
-                          fit: BoxFit.cover,
-                          width: 100,
-                        ),
+                        // trailing: Image.network(
+                        //   doc['imageUrl'],
+                        //   height: 100,
+                        //   fit: BoxFit.cover,
+                        //   width: 100,
+                        // ),
                       );
                     });
               } else {
