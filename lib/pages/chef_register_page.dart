@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_recipe/models/chef_model.dart';
@@ -60,12 +62,14 @@ class _ChefRegisterPageState extends State<ChefRegisterPage> {
         );
       }
     } on FirebaseAuthException catch (e) {
+      debugPrint("Error: $e");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(e.message!),
         ),
       );
     } catch (e) {
+      debugPrint("Error: $e");
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Something went wrong. Please try again'),
