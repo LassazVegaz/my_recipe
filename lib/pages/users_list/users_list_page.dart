@@ -19,7 +19,8 @@ class UsersListPage extends StatefulWidget {
 }
 
 class _UsersListPageState extends State<UsersListPage> {
-  var users = _usersRepo.listenToUsers();
+  var users = _usersRepo
+      .listenToUsers(); ///////////////////////////////////////////////////////////////////////
 
   AccordionSection _buildAccordion(BuildContext context, NormalUser user) {
     var gender = user.gender[0].toUpperCase() + user.gender.substring(1);

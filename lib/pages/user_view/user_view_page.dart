@@ -40,7 +40,7 @@ class _UserViewPageState extends State<UserViewPage> {
   String uid = '';
 
   void _fetchUser() async {
-    final user = await _usersRepo.getUser(uid);
+    final user = await _usersRepo.getUser(uid); ////////////////////////////////
     if (user == null) return;
     nameController.text = user.name;
     emailController.text = user.email;
@@ -65,7 +65,8 @@ class _UserViewPageState extends State<UserViewPage> {
     final user = _buildUser();
 
     try {
-      await _usersRepo.updateUser(user);
+      await _usersRepo.updateUser(
+          user); /////////////////////////////////////////////////////
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -84,7 +85,8 @@ class _UserViewPageState extends State<UserViewPage> {
 
   void _onDeletePressed() async {
     try {
-      await _usersRepo.deleteUser(uid);
+      await _usersRepo.deleteUser(
+          uid); /////////////////////////////////////////////////////////
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -108,7 +110,8 @@ class _UserViewPageState extends State<UserViewPage> {
     if (xfile == null) return;
 
     try {
-      final url = await _usersRepo.uploadProfilePicture(uid, xfile.path);
+      final url = await _usersRepo.uploadProfilePicture(
+          uid, xfile.path); //////////////////////////////////////////
 
       if (!mounted) return;
       setState(() => _image = url);

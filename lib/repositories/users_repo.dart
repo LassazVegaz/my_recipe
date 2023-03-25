@@ -66,7 +66,6 @@ class UsersRepository {
     return users;
   }
 
-  // upload profile image
   Future<String> uploadProfilePicture(String uid, String imgFile) async {
     var file = File(imgFile);
     var fileExt = file.path.split('.').last;
