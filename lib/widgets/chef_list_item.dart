@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:my_recipe/models/chef_model.dart';
+import 'package:my_recipe/pages/chef_view/chef_view_page.dart';
 import 'package:my_recipe/theme.dart';
 
 class ChefListItem extends StatelessWidget {
+  final Chef chef;
+
   const ChefListItem({
     Key? key,
+    required this.chef,
   }) : super(key: key);
 
   @override
@@ -16,30 +21,35 @@ class ChefListItem extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const CircleAvatar(
-            radius: 50,
-            backgroundImage: AssetImage('assets/chef.jpg'),
+          CircleAvatar(
+            radius: 40,
+            backgroundImage: chef.image != null
+                ? Image.network(chef.image!).image
+                : Image.asset('assets/chef.jpg').image,
           ),
-          const SizedBox(width: 30),
+          const SizedBox(width: 15),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Chef Name',
+                  '${chef.firstName} ${chef.lastName}',
                   style: Theme.of(context).textTheme.headline2,
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Chef Description',
+                  chef.email,
                   style: Theme.of(context).textTheme.headline3,
                 ),
               ],
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context)
+                  .pushNamed(ChefViewPage.path, arguments: chef.id);
+            },
             icon: const Icon(Icons.arrow_forward_ios),
           )
         ],

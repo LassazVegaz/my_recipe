@@ -11,23 +11,24 @@ const _h1TextStyle = TextStyle(
   color: Colors.black,
 );
 
-const _primaryColor = Color(0xff324E97);
+const primaryColor = Color(0xff324E97);
 
 const fieldBorderRadius = BorderRadius.all(Radius.circular(8));
 const fieldVerticalGap = 24.0;
 
-const listItemBackground = Color.fromARGB(81, 217, 217, 217);
+const listItemBackground = Color.fromARGB(58, 217, 217, 217);
 const listItemBorderRadius = fieldBorderRadius;
 
 const pagePaddingHorizental = 30.0;
 
 const formButtonWidth = 90.0;
+const _buttonPadding = EdgeInsets.symmetric(vertical: 12, horizontal: 16);
 
 var themeData = ThemeData(
   colorScheme: ColorScheme.fromSwatch(
     backgroundColor: Colors.white,
   ).copyWith(
-    primary: _primaryColor,
+    primary: primaryColor,
     secondary: const Color(0xff973232),
   ),
   textTheme: const TextTheme(
@@ -64,7 +65,7 @@ var themeData = ThemeData(
         color: Colors.white,
       ),
       shape: _buttonBorderShape,
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+      padding: _buttonPadding,
     ),
   ),
   outlinedButtonTheme: OutlinedButtonThemeData(
@@ -72,14 +73,23 @@ var themeData = ThemeData(
       textStyle: const TextStyle(
         fontSize: 13,
         fontWeight: FontWeight.w700,
-        color: _primaryColor,
+        color: primaryColor,
       ),
       shape: _buttonBorderShape,
       side: const BorderSide(
-        color: _primaryColor,
+        color: primaryColor,
         width: 1,
       ),
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+      padding: _buttonPadding,
+    ),
+  ),
+  inputDecorationTheme: const InputDecorationTheme(
+    border: OutlineInputBorder(
+      borderRadius: fieldBorderRadius,
+    ),
+    contentPadding: EdgeInsets.symmetric(
+      vertical: 4,
+      horizontal: 16,
     ),
   ),
 );
