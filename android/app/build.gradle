@@ -52,8 +52,6 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
 
-        // Enabling multidex support.
-        multiDexEnabled true
     }
 
     buildTypes {

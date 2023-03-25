@@ -5,10 +5,12 @@ import 'package:my_recipe/pages/admin_home/admin_home_page.dart';
 import 'package:my_recipe/pages/chef_register_page.dart';
 import 'package:my_recipe/pages/chef_view/chef_view_page.dart';
 import 'package:my_recipe/pages/chefs_list_page.dart';
+
 import 'package:my_recipe/pages/landing_page.dart';
 import 'package:my_recipe/pages/add_recipe_page.dart';
 import 'package:my_recipe/pages/view_recipe_page.dart';
 import 'package:my_recipe/pages/recipe_list_page.dart';
+
 import 'package:my_recipe/pages/login_page.dart';
 import 'package:my_recipe/pages/sample_page.dart';
 import 'package:my_recipe/pages/user_home_page.dart';
@@ -34,13 +36,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'My Recipe',
       theme: themeData,
+
       initialRoute: LandingPage.path,
+
       routes: {
         SampleScreen.path: (context) => const SampleScreen(),
         ChefRegisterPage.path: (context) => const ChefRegisterPage(),
         ChefsListPage.path: (context) => const ChefsListPage(),
         ChefViewPage.path: (context) => const ChefViewPage(),
         LoginPage.path: (context) => const LoginPage(),
+
         UserRegisterPage.path: (context) => const UserRegisterPage(),
         UsersListPage.path: (context) => const UsersListPage(),
         UserViewPage.path: (context) => const UserViewPage(),
@@ -50,6 +55,7 @@ class MyApp extends StatelessWidget {
         AddRecipePage.path: (context) => const AddRecipePage(),
         RecipeListPage.path: (context) => const RecipeListPage(),
         ViewRecipePage.path: (context) => const ViewRecipePage(),
+
       },
     );
   }
