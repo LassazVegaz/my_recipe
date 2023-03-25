@@ -27,6 +27,7 @@ class _ChefViewPageState extends State<ChefViewPage> {
   String? _uid;
   String? gender;
   String? image;
+  List<String> foodTypes = [];
   final _firstNameController = TextEditingController(),
       _lastNameController = TextEditingController(),
       _emailController = TextEditingController(),
@@ -50,7 +51,7 @@ class _ChefViewPageState extends State<ChefViewPage> {
         email: _emailController.text,
         phone: _phoneNumberController.text,
         gender: gender!,
-        foodTypes: [],
+        foodTypes: foodTypes,
         id: _uid,
       );
 
@@ -163,6 +164,8 @@ class _ChefViewPageState extends State<ChefViewPage> {
                   onGenderChanged: (g) => setState(() => gender = g),
                   image: image,
                   onImageSelected: (i) => setState(() => image = i),
+                  foodTypes: foodTypes,
+                  onFoodTypesSelected: (f) => setState(() => foodTypes = f),
                 ),
                 const SizedBox(height: 40),
                 _authRepo.role != Role.user

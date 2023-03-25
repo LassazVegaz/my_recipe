@@ -1,20 +1,21 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:my_recipe/enums/role_enum.dart';
 import 'package:my_recipe/pages/recipe_list_page.dart';
 import 'package:my_recipe/repositories/auth_repo.dart';
 import 'package:my_recipe/theme.dart';
 import 'package:my_recipe/utils/validators.dart';
+import 'package:my_recipe/widgets/food_list_selector.dart';
 import 'package:my_recipe/widgets/gender_field.dart';
 import 'package:my_recipe/widgets/image_selector.dart';
 import 'package:my_recipe/widgets/outlined_textfield.dart';
-import 'package:my_recipe/widgets/rounded_multiselect.dart';
 
 final _authRepo = AuthRrepository.instance;
 
 class ChefFields extends StatelessWidget {
   final void Function(String?)? onGenderChanged;
+  final void Function(List<String>) onFoodTypesSelected;
+  final void Function(String)? onImageSelected;
 
   final TextEditingController? firstNameController,
       lastNameController,
@@ -25,10 +26,12 @@ class ChefFields extends StatelessWidget {
   final String? gender;
   final bool isEditing;
   final String? image;
-  final void Function(String)? onImageSelected;
+  final List<String> foodTypes;
 
   const ChefFields({
     Key? key,
+    required this.onFoodTypesSelected,
+    this.foodTypes = const [],
     this.firstNameController,
     this.lastNameController,
     this.emailController,
@@ -147,14 +150,9 @@ class ChefFields extends StatelessWidget {
           onChanged: userView ? null : onGenderChanged,
         ),
         const SizedBox(height: fieldVerticalGap),
-        RoundedMultiSelect(
-          items: [
-            MultiSelectItem('Italian', 'Italian'),
-            MultiSelectItem('Chinese', 'Chinese'),
-          ],
-          title: 'Select your cuisine',
-          buttonText: 'Food types',
-          onConfirm: (p0) {},
+        FoodListSelector(
+          selectedFoodTypes: foodTypes,
+          onSelected: onFoodTypesSelected,
         ),
       ],
     );

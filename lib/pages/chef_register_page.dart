@@ -107,6 +107,8 @@ class _ChefRegisterPageState extends State<ChefRegisterPage> {
                   onGenderChanged: (g) => setState(() => gender = g),
                   image: image,
                   onImageSelected: (i) => setState(() => image = i),
+                  foodTypes: foodTypes,
+                  onFoodTypesSelected: (f) => setState(() => foodTypes = f),
                 ),
                 const SizedBox(height: 30),
                 ElevatedButton(

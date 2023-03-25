@@ -12,6 +12,7 @@ final _fs = FirebaseStorage.instance;
 final _authRepo = AuthRrepository.instance;
 
 const _colName = 'chefs';
+const _foodTypesColName = 'food_types';
 
 class ChefsRepository {
   // singleton
@@ -89,5 +90,11 @@ class ChefsRepository {
     await _ff.collection(_colName).doc(uid).update({'image': url});
 
     return url;
+  }
+
+  Future<List<String>> getFoodTypes() async {
+    var docs = await _ff.collection(_foodTypesColName).get();
+    var foodTypes = docs.docs.map((e) => e.data()["name"] as String).toList();
+    return foodTypes;
   }
 }
