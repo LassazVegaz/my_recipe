@@ -41,6 +41,8 @@ dependencies:
   accordion: ^2.5.1
   image_picker: ^0.8.7
   email_validator: ^2.1.17
+  http: ^0.13.3
+  webview_flutter: ^2.0.10
 
 dev_dependencies:
   flutter_test:
