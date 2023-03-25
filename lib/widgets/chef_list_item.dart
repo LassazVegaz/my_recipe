@@ -21,9 +21,11 @@ class ChefListItem extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const CircleAvatar(
+          CircleAvatar(
             radius: 40,
-            backgroundImage: AssetImage('assets/chef.jpg'),
+            backgroundImage: chef.image != null
+                ? Image.network(chef.image!).image
+                : Image.asset('assets/chef.jpg').image,
           ),
           const SizedBox(width: 15),
           Expanded(
