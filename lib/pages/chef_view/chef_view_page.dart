@@ -42,6 +42,7 @@ class _ChefViewPageState extends State<ChefViewPage> {
     setState(() {
       gender = chef.gender;
       image = chef.image;
+      foodTypes = chef.foodTypes;
     });
   }
 
