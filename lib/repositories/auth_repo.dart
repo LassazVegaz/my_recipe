@@ -27,7 +27,8 @@ class AuthRrepository {
   }
 
   /// Set role automatically depending on signed in user
-  Future<void> setRole() async => _role = await _getRole();
+  Future<void> setRole() async =>
+      _role = currentUser == null ? null : await _getRole();
 
   // find user in collections users and chefs and return role accordingly
   // if email address is admin@admin.com then return admin
