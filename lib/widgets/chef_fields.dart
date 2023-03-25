@@ -1,15 +1,14 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:my_recipe/enums/role_enum.dart';
 import 'package:my_recipe/pages/recipe_list_page.dart';
 import 'package:my_recipe/repositories/auth_repo.dart';
 import 'package:my_recipe/theme.dart';
 import 'package:my_recipe/utils/validators.dart';
+import 'package:my_recipe/widgets/food_list_selector.dart';
 import 'package:my_recipe/widgets/gender_field.dart';
 import 'package:my_recipe/widgets/image_selector.dart';
 import 'package:my_recipe/widgets/outlined_textfield.dart';
-import 'package:my_recipe/widgets/rounded_multiselect.dart';
 
 final _authRepo = AuthRrepository.instance;
 
@@ -147,15 +146,7 @@ class ChefFields extends StatelessWidget {
           onChanged: userView ? null : onGenderChanged,
         ),
         const SizedBox(height: fieldVerticalGap),
-        RoundedMultiSelect(
-          items: [
-            MultiSelectItem('Italian', 'Italian'),
-            MultiSelectItem('Chinese', 'Chinese'),
-          ],
-          title: 'Select your cuisine',
-          buttonText: 'Food types',
-          onConfirm: (p0) {},
-        ),
+        const FoodListSelector(),
       ],
     );
   }
