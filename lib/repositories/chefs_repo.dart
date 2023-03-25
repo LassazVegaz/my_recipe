@@ -28,7 +28,9 @@ class ChefsRepository {
     await _ff.collection(_colName).doc(fUser.user!.uid).set(map);
 
     chef.id = fUser.user!.uid;
-    chef.image = await uploadProfilePicture(chef.id!, chef.image!);
+    if (chef.image != null) {
+      chef.image = await uploadProfilePicture(chef.id!, chef.image!);
+    }
 
     await _authRepo.setRole();
 

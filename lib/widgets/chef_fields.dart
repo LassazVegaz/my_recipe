@@ -56,11 +56,17 @@ class ChefFields extends StatelessWidget {
             backgroundImage: image,
           ),
         ),
-        const SizedBox(height: 13),
-        OutlinedButton(
-          onPressed: () {},
-          child: const Text('View Recipes'),
-        ),
+        _authRepo.role == null
+            ? const SizedBox.shrink()
+            : Column(
+                children: [
+                  const SizedBox(height: 13),
+                  OutlinedButton(
+                    onPressed: () {},
+                    child: const Text('View Recipes'),
+                  ),
+                ],
+              ),
         const SizedBox(height: 50),
         Row(
           children: [

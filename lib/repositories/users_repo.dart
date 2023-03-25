@@ -28,7 +28,9 @@ class UsersRepository {
     await _ff.collection(_colName).doc(fUser.user!.uid).set(map);
 
     user.id = fUser.user!.uid;
-    user.image = await uploadProfilePicture(user.id!, user.image!);
+    if (user.image != null) {
+      user.image = await uploadProfilePicture(user.id!, user.image!);
+    }
 
     await _authRepo.setRole();
 

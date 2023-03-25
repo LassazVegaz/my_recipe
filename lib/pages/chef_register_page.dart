@@ -60,12 +60,14 @@ class _ChefRegisterPageState extends State<ChefRegisterPage> {
         );
       }
     } on FirebaseAuthException catch (e) {
+      debugPrint("Error: $e");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(e.message!),
         ),
       );
     } catch (e) {
+      debugPrint("Error: $e");
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Something went wrong. Please try again'),
