@@ -14,6 +14,8 @@ final _authRepo = AuthRrepository.instance;
 
 class ChefFields extends StatelessWidget {
   final void Function(String?)? onGenderChanged;
+  final void Function(List<String>) onFoodTypesSelected;
+  final void Function(String)? onImageSelected;
 
   final TextEditingController? firstNameController,
       lastNameController,
@@ -24,10 +26,12 @@ class ChefFields extends StatelessWidget {
   final String? gender;
   final bool isEditing;
   final String? image;
-  final void Function(String)? onImageSelected;
+  final List<String> foodTypes;
 
   const ChefFields({
     Key? key,
+    required this.onFoodTypesSelected,
+    this.foodTypes = const [],
     this.firstNameController,
     this.lastNameController,
     this.emailController,
@@ -146,7 +150,10 @@ class ChefFields extends StatelessWidget {
           onChanged: userView ? null : onGenderChanged,
         ),
         const SizedBox(height: fieldVerticalGap),
-        const FoodListSelector(),
+        FoodListSelector(
+          selectedFoodTypes: foodTypes,
+          onSelected: onFoodTypesSelected,
+        ),
       ],
     );
   }

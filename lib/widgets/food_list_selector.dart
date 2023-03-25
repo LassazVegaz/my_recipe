@@ -6,8 +6,13 @@ import 'package:my_recipe/widgets/rounded_multiselect.dart';
 final _chefRepo = ChefsRepository.instance;
 
 class FoodListSelector extends StatefulWidget {
+  final List<String> selectedFoodTypes;
+  final void Function(List<String>) onSelected;
+
   const FoodListSelector({
     Key? key,
+    this.selectedFoodTypes = const [],
+    required this.onSelected,
   }) : super(key: key);
 
   @override
@@ -32,9 +37,10 @@ class _FoodListSelectorState extends State<FoodListSelector> {
   Widget build(BuildContext context) {
     return RoundedMultiSelect(
       items: _foodTypes.map((e) => MultiSelectItem(e, e)).toList(),
+      selectedItems: widget.selectedFoodTypes,
       title: 'Select your cuisine',
       buttonText: 'Food types',
-      onConfirm: (p0) {},
+      onConfirm: widget.onSelected,
     );
   }
 }

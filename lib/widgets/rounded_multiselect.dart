@@ -6,12 +6,14 @@ class RoundedMultiSelect<T> extends StatelessWidget {
   final List<MultiSelectItem<T>> items;
   final String? title;
   final String? buttonText;
-  final void Function(List<T>?) onConfirm;
+  final void Function(List<T>) onConfirm;
+  final List<T> selectedItems;
 
   const RoundedMultiSelect({
     Key? key,
     required this.items,
     required this.onConfirm,
+    this.selectedItems = const [],
     this.title,
     this.buttonText,
   }) : super(key: key);
@@ -24,6 +26,7 @@ class RoundedMultiSelect<T> extends StatelessWidget {
       buttonText: Text(buttonText ?? 'Select'),
       selectedColor: themeData.colorScheme.primary,
       onConfirm: onConfirm,
+      initialValue: selectedItems,
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.grey,
