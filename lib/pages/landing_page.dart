@@ -28,7 +28,8 @@ class _LandingPageState extends State<LandingPage> {
         Navigator.pushReplacementNamed(context, AdminHomePage.path);
         break;
       case Role.chef:
-        Navigator.pushReplacementNamed(context, ChefViewPage.path);
+        Navigator.pushReplacementNamed(context, ChefViewPage.path,
+            arguments: _authRepo.currentUser!.uid);
         break;
       case Role.user:
         Navigator.pushReplacementNamed(context, UserHomePage.path);
