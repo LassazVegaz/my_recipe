@@ -2,6 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:my_recipe/enums/role_enum.dart';
+import 'package:my_recipe/pages/recipe_list_page.dart';
 import 'package:my_recipe/repositories/auth_repo.dart';
 import 'package:my_recipe/theme.dart';
 import 'package:my_recipe/utils/validators.dart';
@@ -62,7 +63,9 @@ class ChefFields extends StatelessWidget {
                 children: [
                   const SizedBox(height: 13),
                   OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(RecipeListPage.path);
+                    },
                     child: const Text('View Recipes'),
                   ),
                 ],
