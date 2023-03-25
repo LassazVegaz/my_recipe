@@ -4,10 +4,9 @@ import 'package:my_recipe/firebase_options.dart';
 import 'package:my_recipe/pages/chef_register_page.dart';
 import 'package:my_recipe/pages/chef_view_page.dart';
 import 'package:my_recipe/pages/chefs_list_page.dart';
-import 'package:my_recipe/pages/add_recipe.dart';
-import 'package:my_recipe/pages/recipe_page.dart';
-import 'package:my_recipe/pages/model.dart';
-import 'package:my_recipe/pages/recipe_list.dart';
+import 'package:my_recipe/pages/add_recipe_page.dart';
+import 'package:my_recipe/pages/view_recipe_page.dart';
+import 'package:my_recipe/pages/recipe_list_page.dart';
 import 'package:my_recipe/pages/login_page.dart';
 import 'package:my_recipe/pages/sample_page.dart';
 import 'package:my_recipe/theme.dart';
@@ -29,16 +28,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'My Recipe',
       theme: themeData,
-      initialRoute: AddRecipe.path,
+      initialRoute: AddRecipePage.path,
       routes: {
         SampleScreen.path: (context) => const SampleScreen(),
         ChefRegisterPage.path: (context) => const ChefRegisterPage(),
         ChefsListPage.path: (context) => const ChefsListPage(),
         ChefViewPage.path: (context) => const ChefViewPage(),
         LoginPage.path: (context) => const LoginPage(),
-        AddRecipe.path: (context) => const AddRecipe(),
-        ListScreen.path: (context) => const ListScreen(),
-        RecipePage.path: (context) => const RecipePage(),
+        AddRecipePage.path: (context) => const AddRecipePage(),
+        RecipeListPage.path: (context) => const RecipeListPage(),
+        ViewRecipePage.path: (context) => const ViewRecipePage(),
       },
     );
   }

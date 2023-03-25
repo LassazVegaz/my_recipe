@@ -1,24 +1,24 @@
 import 'dart:convert';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'package:my_recipe/pages/model.dart';
+import 'package:my_recipe/models/recipe_model.dart';
 
-class RecipePage extends StatefulWidget {
+class ViewRecipePage extends StatefulWidget {
   static const path = '/recipe_page';
-  const RecipePage({Key? key}) : super(key: key);
+  const ViewRecipePage({Key? key}) : super(key: key);
   @override
-  RecipePageState createState() => RecipePageState();
+  ViewRecipePageState createState() => ViewRecipePageState();
 }
+
 //recipe static page
-class RecipePageState extends State<RecipePage> {
+class ViewRecipePageState extends State<ViewRecipePage> {
   List<Model> list = <Model>[];
   String? text;
-  final Url =
+  final url =
       'https://api.edamam.com/search?q=chicken&app_id=c51cc1ad&app_key=a5bc768cf935c188b767c369c1e81802	&from=0&to=100&calories=591-722&health=alcohol-free';
   getApiData() async {
-    var response = await http.get(Uri.parse(Url));
+    var response = await http.get(Uri.parse(url));
     Map json = jsonDecode(response.body);
     json['hits'].forEach((e) {
       //declaring recipe model
@@ -43,10 +43,10 @@ class RecipePageState extends State<RecipePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 51, 50, 50),
-      appBar: AppBar(elevation: 0, title: Text("Recipes")),
+      backgroundColor: const Color.fromARGB(255, 51, 50, 50),
+      appBar: AppBar(elevation: 0, title: const Text("Recipes")),
       body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -58,7 +58,7 @@ class RecipePageState extends State<RecipePage> {
                 decoration: InputDecoration(
                     suffixIcon: IconButton(
                       onPressed: () {},
-                      icon: Icon(Icons.search),
+                      icon: const Icon(Icons.search),
                     ),
                     hintText: "search",
                     border: OutlineInputBorder(
@@ -66,14 +66,14 @@ class RecipePageState extends State<RecipePage> {
                     fillColor: Colors.green.withOpacity(0.2),
                     filled: true),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               GridView.builder(
-                  physics: ScrollPhysics(),
+                  physics: const ScrollPhysics(),
                   shrinkWrap: true,
                   primary: true,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 15,
                       mainAxisSpacing: 15),
@@ -99,17 +99,17 @@ class RecipePageState extends State<RecipePage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                padding: EdgeInsets.all(3),
+                                padding: const EdgeInsets.all(3),
                                 height: 40,
                                 color: Colors.white.withOpacity(0.4),
                                 child: Center(child: Text(x.label.toString())),
                               ),
                               Container(
-                                padding: EdgeInsets.all(3),
+                                padding: const EdgeInsets.all(3),
                                 height: 40,
                                 color: Colors.white.withOpacity(0.4),
                                 child: Center(
-                                  child: Text("Source: " + x.source.toString()),
+                                  child: Text("Source: ${x.source}"),
                                 ),
                               )
                             ],
@@ -125,8 +125,8 @@ class RecipePageState extends State<RecipePage> {
 }
 
 class WebPage extends StatelessWidget {
-  final url;
-  WebPage({this.url});
+  final dynamic url;
+  const WebPage({this.url});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

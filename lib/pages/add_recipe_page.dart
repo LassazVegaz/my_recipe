@@ -1,22 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:my_recipe/firebase_options.dart';
-import 'package:my_recipe/pages/recipe_list.dart';
+import 'package:my_recipe/pages/recipe_list_page.dart';
 
-import '../main.dart';
-
-class AddRecipe extends StatefulWidget {
+class AddRecipePage extends StatefulWidget {
   static const path = '/add_recipe';
-  const AddRecipe({Key? key}) : super(key: key);
+  const AddRecipePage({Key? key}) : super(key: key);
   @override
-  _AddRecipeState createState() => _AddRecipeState();
+  _AddRecipePageState createState() => _AddRecipePageState();
 }
 
-class _AddRecipeState extends State<AddRecipe> {
-  Color primaryColor = Color(0xff18203d);
-  Color secondaryColor = Color(0xff232c51);
-  Color logoGreen = Color(0xff25bcbb);
+class _AddRecipePageState extends State<AddRecipePage> {
+  Color primaryColor = const Color(0xff18203d);
+  Color secondaryColor = const Color(0xff232c51);
+  Color logoGreen = const Color(0xff25bcbb);
   //declaring attributes
   TextEditingController nameController = TextEditingController();
   TextEditingController ingredientsController = TextEditingController();
@@ -43,16 +39,16 @@ class _AddRecipeState extends State<AddRecipe> {
 
   _buildTextField(TextEditingController controller, String labelText) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
           color: secondaryColor, border: Border.all(color: Colors.blue)),
       child: TextField(
         controller: controller,
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
         decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 10),
             labelText: labelText,
-            labelStyle: TextStyle(color: Colors.white),
+            labelStyle: const TextStyle(color: Colors.white),
             // prefix: Icon(icon),
             border: InputBorder.none),
       ),
@@ -66,51 +62,51 @@ class _AddRecipeState extends State<AddRecipe> {
           backgroundColor: Colors.transparent,
           actions: <Widget>[
             IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.folder_open,
                 color: Colors.white,
               ),
               onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => ListScreen()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const RecipeListPage()));
               },
             )
           ],
         ),
         backgroundColor: primaryColor,
         body: Container(
-          margin: EdgeInsets.symmetric(horizontal: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 20),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Text(
+                const Text(
                   'Recipes ',
                   style: TextStyle(color: Colors.white, fontSize: 28),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 50,
                 ),
                 //declaring the attributes of recipe
                 _buildTextField(nameController, 'Name'),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 _buildTextField(ingredientsController, 'Ingredients'),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 _buildTextField(calorieController, 'Calorie'),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 _buildTextField(imageUrlController, 'Image Url'),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 ElevatedButton(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(16.0),
                     child: Text('Add Recipes'),
                   ),
                   onPressed: () {
