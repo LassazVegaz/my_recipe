@@ -5,6 +5,7 @@ A new Flutter project.
 Three components were separated between 3 members as follows,
 
 ID	                          |  Name	                   | Component
+--------------------------------------------------------------------------
 
 IT20168254 | Weerasinghe P.A.L.N	     | Manage chefs
 
