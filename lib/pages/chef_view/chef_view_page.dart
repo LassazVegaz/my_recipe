@@ -54,6 +54,7 @@ class _ChefViewPageState extends State<ChefViewPage> {
         gender: gender!,
         foodTypes: foodTypes,
         id: _uid,
+        image: image,
       );
 
   void _onUppdatePressed() async {
@@ -86,9 +87,17 @@ class _ChefViewPageState extends State<ChefViewPage> {
     try {
       await _chefsRepo.deleteChef(_uid!);
 
+      if (_authRepo.role == Role.chef) {
+        await _authRepo.signOut();
+      }
+
       if (!mounted) return;
 
-      Navigator.of(context).pushReplacementNamed(LoginPage.path);
+      if (_authRepo.role == Role.chef) {
+        Navigator.of(context).pushReplacementNamed(LoginPage.path);
+      } else {
+        Navigator.of(context).pop();
+      }
     } catch (e) {
       stderr.writeln(e);
       ScaffoldMessenger.of(context).showSnackBar(

@@ -49,6 +49,10 @@ class ChefsRepository {
   }
 
   Future<void> updateChef(Chef chef) async {
+    if (chef.image != null) {
+      chef.image = await uploadProfilePicture(chef.id!, chef.image!);
+    }
+
     var map = chef.toJson();
     await _ff.collection(_colName).doc(chef.id).update(map);
   }
@@ -80,6 +84,8 @@ class ChefsRepository {
   }
 
   Future<String> uploadProfilePicture(String uid, String imgFile) async {
+    if (imgFile.startsWith('http')) return imgFile;
+
     var file = File(imgFile);
     var fileExt = file.path.split('.').last;
 
