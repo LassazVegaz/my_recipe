@@ -8,6 +8,8 @@ import 'package:my_recipe/repositories/auth_repo.dart';
 
 final _authRepo = AuthRrepository.instance;
 
+const _splashDuration = Duration(seconds: 2);
+
 class LandingPage extends StatefulWidget {
   static const path = '/landing';
 
@@ -19,6 +21,9 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage> {
   void _initRouting() async {
+    // delay to show splash screen
+    await Future.delayed(_splashDuration);
+
     await _authRepo.setRole();
 
     if (!mounted) return;
